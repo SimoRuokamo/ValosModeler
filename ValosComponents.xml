@@ -1,0 +1,3705 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Components>
+	<!-- Name UI menu, Namespace ryhmittellyyn (cpoming .....), Description tooltip
+	<Component Name="Kuutio" NameSpace="Valos.Components" Description="Testi kappale">
+		 Label on dialogissa näkyvä nimi, Type=String/Double/Int, Defaultvalue on default
+		<Attributes>
+			 Name on komponentille tuleva nimi
+			<Name Label="Nimi" Type="String" DefaultValue="Testi"/>
+			 Attribuutteja voi käyttää geometrian muodostamiseen, attribuutti kaavassa [] sulkujen sisässä, 
+			katso Solid määärittelyt
+			<SizeX Label="Koko X" Type="Double" DefaultValue="1000" />
+			<SizeY Label="Koko Y" Type="Double" DefaultValue="500"/>
+			<SizeZ Label="Koko Z" Type="Double" DefaultValue="2000"/>
+			<Color Label="Väri" Type="Color" DefaultValue="#FF000000" />
+		</Attributes>
+		Goemetrian määritelyt, tarkkuustaso Grade = Schematic/Concept/Exact, suositus on Schematic
+		<Geometry Grade="Schematic">
+			 Solid type on tuettu geometria tyyppi, nyt RectangularCuboid (Suorakulmainen suuntaissärmiö) ja Cylinder. Seuraavana listalla
+			ExtrudedSolid (murtoviivalla määritellyn alan pursotus). Kullakin tyypille sille ominaiset attribuutit
+			BooleanOperation on Primary/SubtactionDynamic, UnionDynamic seuraavana listalla. Oletus on primary, subtractiondynamic poistaa ko. solidin
+			<Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[SizeX]" SizeY="[SizeY]" SizeZ ="[SizeZ]"
+				   ShiftX="0" ShiftY="0" ShiftZ="0" Color="#FF0000FF">
+	 Solidin koordinaatisto suhteessa syötettyyn. Oletus on Origo=0,0,0, XAxis=100,0,0, YAxis=0,100,0
+				Vain akselien suunnalla on merkitystä, akselin pituus ei vaikuta
+				<Origin X="0" Y="0" Z="0"/>
+				<Xaxis X="100" Y="0" Z="0"/>
+				<YAxis X="0" Y="100" Z="0"/>
+			 Solideja voi määritellä hierarkisesti, koordinaatisto määritellään ylemmän solidin suhteen. 
+				<Solid Type="Cylinder" BooleanOperation="SubtractionDynamic" Diameter="0.5*[SizeX]" Length="2*[SizeZ]" >
+					<Origin X="0" Y="0" Z="-100" />
+					<Xaxis X="100" Y="0" Z="0" />
+					<Yaxis X="0" Y="100" Z="0" />
+				</Solid>
+			</Solid>
+			<Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[SizeX]" SizeY="[SizeY]" SizeZ ="[SizeZ]">
+				<Origin X="4*[SizeX]" Y="0" Z="0"/>
+				<Xaxis X="100" Y="0" Z="0"/>
+				<YAxis X="0" Y="100" Z="0"/>
+				<Solid Type="Cylinder" BooleanOperation="SubtractionDynamic" Diameter="0.5*[SizeX]" Length="2*[SizeY]" >
+					<Origin X="0" Y="-[SizeY]" Z="0.5*[SizeZ]" />
+					<Xaxis X="100" Y="0" Z="0" />
+					<Yaxis X="0" Y="0" Z="-100" />
+				</Solid>
+			</Solid>
+		</Geometry>
+	</Component>
+  
+  <Component Name="Pöytä" NameSpace="Valos.Components.Huonekalut" Description="Pöytä">
+		<Attributes>
+			<Name Label="Nimi" Type="String" DefaultValue="Pöytä"/>
+			<Korkeus Label="Korkeus" Type="Double" DefaultValue="800" />
+			<Pituus Label="Kannen pituus" Type="Double" DefaultValue="1200"/>
+			<Leveys Label="Kannen leveys" Type="Double" DefaultValue="800"/>
+			<Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+		</Attributes>
+		 Kansi 30 mm paksu, jalat halkaisija 50, jalat reunasta 50 mm
+		<Geometry Grade="Schematic">
+			 Pyöreät jalat
+			<Solid Type="Cylinder" Diameter="50" Length="[Korkeus]-30" >
+				<Origin X="50" Y="0.5*[Leveys]-50" Z="0" />
+				<Xaxis X="100" Y="0" Z="0" />
+				<Yaxis X="0" Y="100" Z="0" />
+			</Solid>
+			<Solid Type="Cylinder" Diameter="50" Length="[Korkeus]-30" >
+				<Origin X="50" Y="-0.5*[Leveys]+50" Z="0" />
+				<Xaxis X="100" Y="0" Z="0" />
+				<Yaxis X="0" Y="100" Z="0" />
+			</Solid>
+			<Solid Type="Cylinder" Diameter="50" Length="[Korkeus]-30" >
+				<Origin X="[Pituus]-50" Y="0.5*[Leveys]-50" Z="0" />
+				<Xaxis X="100" Y="0" Z="0" />
+				<Yaxis X="0" Y="100" Z="0" />
+			</Solid>
+			<Solid Type="Cylinder" Diameter="50" Length="[Korkeus]-30" >
+				<Origin X="[Pituus]-50" Y="-0.5*[Leveys]+50" Z="0" />
+				<Xaxis X="100" Y="0" Z="0" />
+				<Yaxis X="0" Y="100" Z="0" />
+			</Solid>
+			 Kansi
+			<Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="30" >
+				<Origin X="[Pituus]/2" Y="0" Z="[Korkeus]-30"/>
+				<Xaxis X="100" Y="0" Z="0"/>
+				<YAxis X="0" Y="100" Z="0"/>
+			</Solid>
+		</Geometry>
+	</Component>-->
+  
+  <Component Name="Pöytä, vasen" NameSpace="Valos.Components.Huonekalut" Description="Pöytä">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Pöytä"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="800" />
+      <Pituus Label="Kannen pituus" Type="Double" DefaultValue="1200"/>
+      <Leveys Label="Kannen leveys" Type="Double" DefaultValue="800"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Kansi 50 mm paksu, jalat 40 x 40, jalat reunasta 50 mm-->
+    <Geometry Grade="Schematic">
+      <!-- nelikulmiojalat-->
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="[Korkeus]" >
+        <Origin X="60" Y="60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="[Korkeus]" >
+        <Origin X="60" Y="[Leveys]-60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="[Korkeus]" >
+        <Origin X="[Pituus]-60" Y="60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="[Korkeus]" >
+        <Origin X="[Pituus]-60" Y="[Leveys]-60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Kansi-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="50" >
+        <Origin X="[Pituus]/2" Y="[Leveys]/2" Z="[Korkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Pöytä, oikea" NameSpace="Valos.Components.Huonekalut" Description="Pöytä">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Pöytä"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="800" />
+      <Pituus Label="Kannen pituus" Type="Double" DefaultValue="1200"/>
+      <Leveys Label="Kannen leveys" Type="Double" DefaultValue="800"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Kansi 50 mm paksu, jalat 40 x 40, jalat reunasta 50 mm-->
+    <Geometry Grade="Schematic">
+      <!-- nelikulmiojalat-->
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="[Korkeus]" >
+        <Origin X="60" Y="-60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="[Korkeus]" >
+        <Origin X="60" Y="-[Leveys]+60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="[Korkeus]" >
+        <Origin X="[Pituus]-60" Y="-60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="[Korkeus]" >
+        <Origin X="[Pituus]-60" Y="-[Leveys]+60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Kansi-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="50" >
+        <Origin X="[Pituus]/2" Y="-[Leveys]/2" Z="[Korkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+    
+  <Component Name="Tuoli" NameSpace="Valos.Components.Huonekalut" Description="Tuoli">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Tuoli"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Tuolin pituus" Type="Double" DefaultValue="500"/>
+      <Leveys Label="Tuolin leveys" Type="Double" DefaultValue="500"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Kansi 30 mm paksu, jalat halkaisija 50, jalat reunasta 50 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="40" Length="[Korkeus]-30" >
+        <Origin X="20" Y="0.5*[Leveys]-20" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="40" Length="[Korkeus]-30" >
+        <Origin X="20" Y="-0.5*[Leveys]+20" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="40" Length="[Korkeus]-30" >
+        <Origin X="[Pituus]-20" Y="0.5*[Leveys]-20" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="40" Length="[Korkeus]-30" >
+        <Origin X="[Pituus]-20" Y="-0.5*[Leveys]+20" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Kansi-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="30" >
+        <Origin X="[Pituus]/2" Y="0" Z="[Korkeus]-30"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="[Leveys]" SizeZ ="[Korkeus]" >
+        <Origin X="0" Y="0" Z="[Korkeus]-30"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+ 
+  <Component Name="Tuoli, vasen" NameSpace="Valos.Components.Huonekalut" Description="Tuoli">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Tuoli"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Tuolin pituus" Type="Double" DefaultValue="500"/>
+      <Leveys Label="Tuolin leveys" Type="Double" DefaultValue="500"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Istuin 30 mm paksu, jalat 30 x 30, jalat reunasta 0 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Nelikulmio jalat-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]" >
+        <Origin X="15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]" >
+        <Origin X="15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]" >
+        <Origin X="[Pituus]-15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]">
+        <Origin X="[Pituus]-15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Istuin-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="30" >
+        <Origin X="[Pituus]/2" Y="[Leveys]/2" Z="[Korkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="[Leveys]" SizeZ ="[Korkeus]" >
+        <Origin X="15" Y="[Leveys]/2" Z="[Korkeus]+30"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Tuoli, oikea" NameSpace="Valos.Components.Huonekalut" Description="Tuoli">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Tuoli"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Tuolin pituus" Type="Double" DefaultValue="500"/>
+      <Leveys Label="Tuolin leveys" Type="Double" DefaultValue="500"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Istuin 30 mm paksu, jalat 30 x 30, jalat reunasta 0 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Nelkulmio jalat-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]" >
+        <Origin X="15" Y="-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]" >
+        <Origin X="15" Y="15-[Leveys]" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]" >
+        <Origin X="[Pituus]-15" Y="-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]">
+        <Origin X="[Pituus]-15" Y="15-[Leveys]" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Istuin-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="30" >
+        <Origin X="[Pituus]/2" Y="-[Leveys]/2" Z="[Korkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="[Leveys]" SizeZ ="[Korkeus]" >
+        <Origin X="15" Y="-[Leveys]/2" Z="[Korkeus]+30"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Nojatuoli, vasen" NameSpace="Valos.Components.Huonekalut" Description="Nojatuoli">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Nojatuoli"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Tuolin pituus" Type="Double" DefaultValue="550"/>
+      <Leveys Label="Tuolin leveys" Type="Double" DefaultValue="550"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Istuin 300 mm paksu, jalat 30 x 30, jalat reunasta 0 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Nelikulmio jalat-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="[Pituus]-15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250">
+        <Origin X="[Pituus]-15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Istuin-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="150" >
+        <Origin X="[Pituus]/2" Y="[Leveys]/2" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="110" SizeY="[Leveys]" SizeZ ="450" >
+        <Origin X="55" Y="[Leveys]/2" Z="[Korkeus]-200"/>
+        <Xaxis X="100" Y="0" Z="15"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Nojatuoli, oikea" NameSpace="Valos.Components.Huonekalut" Description="Nojatuoli">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Nojatuoli"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Tuolin pituus" Type="Double" DefaultValue="550"/>
+      <Leveys Label="Tuolin leveys" Type="Double" DefaultValue="550"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Istuin 300 mm paksu, jalat 30 x 30, jalat reunasta 0 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Nelikulmio jalat-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="-[Leveys]+15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="[Pituus]-15" Y="-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250">
+        <Origin X="[Pituus]-15" Y="-[Leveys]+15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Istuin-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="150" >
+        <Origin X="[Pituus]/2" Y="-[Leveys]/2" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="110" SizeY="[Leveys]" SizeZ ="450" >
+        <Origin X="55" Y="-[Leveys]/2" Z="[Korkeus]-200"/>
+        <Xaxis X="100" Y="0" Z="15"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Sohva, vasen" NameSpace="Valos.Components.Huonekalut" Description="Sohva">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Sohva"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Sohvan pituus" Type="Double" DefaultValue="550"/>
+      <Leveys Label="Sohvan leveys" Type="Double" DefaultValue="1200"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Istuin 300 mm paksu, jalat 30 x 30, jalat reunasta 0 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Nelkulmio jalat-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="[Pituus]-15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250">
+        <Origin X="[Pituus]-15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Istuin-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="150" >
+        <Origin X="[Pituus]/2" Y="[Leveys]/2" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="110" SizeY="[Leveys]" SizeZ ="450" >
+        <Origin X="55" Y="[Leveys]/2" Z="[Korkeus]-200"/>
+        <Xaxis X="100" Y="0" Z="15"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Sohva, oikea" NameSpace="Valos.Components.Huonekalut" Description="Sohva">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Sohva"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Sohvan pituus" Type="Double" DefaultValue="550"/>
+      <Leveys Label="Sohvan leveys" Type="Double" DefaultValue="1200"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Istuin 300 mm paksu, jalat 30 x 30, jalat reunasta 0 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Nelkulmio jalat-->
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="-[Leveys]+15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="[Pituus]-15" Y="-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250">
+        <Origin X="[Pituus]-15" Y="-[Leveys]+15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Istuin-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="150" >
+        <Origin X="[Pituus]/2" Y="-[Leveys]/2" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="110" SizeY="[Leveys]" SizeZ ="450" >
+        <Origin X="55" Y="-[Leveys]/2" Z="[Korkeus]-200"/>
+        <Xaxis X="100" Y="0" Z="15"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Kulmasohva, vasen" NameSpace="Valos.Components.Huonekalut" Description="Kulmasohva">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Kulmasohva"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Sohvan pituus" Type="Double" DefaultValue="550"/>
+      <Leveys Label="Sohvan leveys" Type="Double" DefaultValue="1200"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Istuin 300 mm paksu, jalat 30 x 30, jalat reunasta 0 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Nelkulmio jalat
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="[Pituus]-15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250">
+        <Origin X="[Pituus]-15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>-->
+      <!-- Istuin
+      <Solid Type="RectangularCuboid" SizeX="800" SizeY="1200" SizeZ ="150" >
+        <Origin X="0" Y="-200" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>-->
+      <!-- Istuin-->
+      <Solid Type="RectangularCuboid" SizeX="1800" SizeY="800" SizeZ ="150" >
+        <Origin X="900" Y="-400" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="1800" SizeY="150" SizeZ ="500" >
+        <Origin X="900" Y="-75" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>-->
+      <!-- istuin2-->
+      <Solid Type="RectangularCuboid" SizeX="800" SizeY="1600" SizeZ ="150" >
+        <Origin X="400" Y="-1600" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- selkänoja2-->
+      <Solid Type="RectangularCuboid" SizeX="150" SizeY="2300" SizeZ ="500" >
+        <Origin X="75" Y="-1250" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Kulmasohva, oikea" NameSpace="Valos.Components.Huonekalut" Description="Kulmasohva">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Kulmasohva"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="450" />
+      <Pituus Label="Sohvan pituus" Type="Double" DefaultValue="550"/>
+      <Leveys Label="Sohvan leveys" Type="Double" DefaultValue="1200"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Istuin 300 mm paksu, jalat 30 x 30, jalat reunasta 0 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Nelkulmio jalat
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250" >
+        <Origin X="[Pituus]-15" Y="15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="30" SizeY="30" SizeZ ="[Korkeus]-250">
+        <Origin X="[Pituus]-15" Y="[Leveys]-15" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>-->
+      <!-- Istuin
+      <Solid Type="RectangularCuboid" SizeX="800" SizeY="1200" SizeZ ="150" >
+        <Origin X="0" Y="-200" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>-->
+      <!-- Istuin-->
+      <Solid Type="RectangularCuboid" SizeX="1800" SizeY="800" SizeZ ="150" >
+        <Origin X="900" Y="400" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--selkänoja-->
+      <Solid Type="RectangularCuboid" SizeX="1800" SizeY="150" SizeZ ="500" >
+        <Origin X="900" Y="75" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>-->
+      <!-- istuin2-->
+      <Solid Type="RectangularCuboid" SizeX="800" SizeY="1600" SizeZ ="150" >
+        <Origin X="400" Y="1600" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- selkänoja2-->
+      <Solid Type="RectangularCuboid" SizeX="150" SizeY="2300" SizeZ ="500" >
+        <Origin X="75" Y="1250" Z="[Korkeus]-250"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Sänky, vasen" NameSpace="Valos.Components.Huonekalut" Description="Sänky">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="sänky"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="500" />
+      <Pituus Label="Sängyn pituus" Type="Double" DefaultValue="2000"/>
+      <Leveys Label="Sängyn leveys" Type="Double" DefaultValue="800"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Kansi 30 mm paksu, jalat halkaisija 50, jalat reunasta 50 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="[Korkeus]/2" >
+        <Origin X="50" Y="50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="[Korkeus]/2" >
+        <Origin X="50" Y="[Leveys]-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="[Korkeus]/2" >
+        <Origin X="[Pituus]-50" Y="[Leveys]-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="[Korkeus]/2" >
+        <Origin X="[Pituus]-50" Y="50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Patja-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="300" >
+        <Origin X="[Pituus]/2" Y="[Leveys]/2" Z="[Korkeus]-300"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+    
+  <Component Name="Sänky, oikea" NameSpace="Valos.Components.Huonekalut" Description="Sänky">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="sänky"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="500" />
+      <Pituus Label="Sängyn pituus" Type="Double" DefaultValue="2000"/>
+      <Leveys Label="Sängyn leveys" Type="Double" DefaultValue="800"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- Kansi 30 mm paksu, jalat halkaisija 50, jalat reunasta 50 mm-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="[Korkeus]/2" >
+        <Origin X="50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="[Korkeus]/2" >
+        <Origin X="50" Y="-[Leveys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="[Korkeus]/2" >
+        <Origin X="[Pituus]-50" Y="-[Leveys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="[Korkeus]/2" >
+        <Origin X="[Pituus]-50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- Patja-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="300" >
+        <Origin X="[Pituus]/2" Y="-[Leveys]/2" Z="[Korkeus]-300"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Senkki, vasen" NameSpace="Valos.Components.Huonekalut" Description="Senkki">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Senkki"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />
+      <Pituus Label="Pituus" Type="Double" DefaultValue="1200"/>
+      <Leveys Label="Leveys" Type="Double" DefaultValue="400"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- Kansi 50 mm paksu, jalat 40 x 40, jalat reunasta 50 mm-->
+    <Geometry Grade="Schematic">
+      <!-- nelikulmiojalat-->
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="150" >
+        <Origin X="60" Y="60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="150" >
+        <Origin X="60" Y="[Leveys]-60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="150" >
+        <Origin X="[Pituus]-60" Y="60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="150" >
+        <Origin X="[Pituus]-60" Y="[Leveys]-60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- säilytysosa-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="[Korkeus]-150" >
+        <Origin X="[Pituus]/2" Y="[Leveys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]-3" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Pituus]/2" Y="0" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+
+  <Component Name="Senkki, oikea" NameSpace="Valos.Components.Huonekalut" Description="Senkki">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Senkki"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />
+      <Pituus Label="Pituus" Type="Double" DefaultValue="1200"/>
+      <Leveys Label="Leveys" Type="Double" DefaultValue="400"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- Kansi 50 mm paksu, jalat 40 x 40, jalat reunasta 50 mm-->
+    <Geometry Grade="Schematic">
+      <!-- nelikulmiojalat-->
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="150" >
+        <Origin X="60" Y="-60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="150" >
+        <Origin X="60" Y="-[Leveys]+60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="150" >
+        <Origin X="[Pituus]-60" Y="-60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="40" SizeY="40" SizeZ ="150" >
+        <Origin X="[Pituus]-60" Y="-[Leveys]+60" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- säilytysosa-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]" SizeY="[Leveys]" SizeZ ="[Korkeus]-150" >
+        <Origin X="[Pituus]/2" Y="-[Leveys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Pituus]-3" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Pituus]/2" Y="20" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Liesiuuni" NameSpace="Valos.Components.Keittiökalusteet" Description="Liesitaso uunilla">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Liesiuuni"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Levyn väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="520" SizeZ ="150" >
+        <Origin X="300" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- liesiuuni-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="600" SizeZ ="750" >
+        <Origin X="300" Y="-300" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- liesilevyt-->
+      <Solid Type="Cylinder" Diameter="200" Length="20" Color="[Color2]">
+        <Origin X="450" Y="-450" Z="900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="200" Length="20" Color="[Color2]">
+        <Origin X="450" Y="-150" Z="900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="200" Length="20" Color="[Color2]">
+        <Origin X="150" Y="-450" Z="900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="200" Length="20" Color="[Color2]">
+        <Origin X="150" Y="-150" Z="900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- uuniluukku-->
+      <Solid Type="RectangularCuboid" SizeX="500" SizeY="300" SizeZ ="310" Color="[Color2]">
+        <Origin X="300" Y="-300" Z="600" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Induktiotaso, uunikaappi" NameSpace="Valos.Components.Keittiökalusteet" Description="Induktiotaso, uuni">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Induktiotaso, uuni"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Levyn väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="520" SizeZ ="150" >
+        <Origin X="300" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="600" SizeZ ="710" >
+        <Origin X="300" Y="-300" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- induktiotaso -->
+      <Solid Type="RectangularCuboid" SizeX="550" SizeY="550" SizeZ ="60" Color="[Color2]">
+        <Origin X="300" Y="-300" Z="850" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- uuniluukku-->
+      <Solid Type="RectangularCuboid" SizeX="500" SizeY="300" SizeZ ="310" Color="[Color2]">
+        <Origin X="300" Y="-300" Z="600" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Mikroaaltouuni" NameSpace="Valos.Components.Keittiökalusteet" Description="Mikroaaltouuni">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Mikroaaltouuni"/>
+      <Korkeusasema Label="Korkeusasema" Type="Double" DefaultValue="1420" />
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="520" SizeZ ="150" >
+        <Origin X="300" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>-->
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="500" SizeY="300" SizeZ ="300" >
+        <Origin X="300" Y="-300" Z="[Korkeusasema]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+        <!--ovi-->
+      <Solid Type="RectangularCuboid" SizeX="375" SizeY="20" SizeZ ="225" Color="[Color2]">
+        <Origin X="275" Y="-450" Z="[Korkeusasema]+40"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- uuniluukku
+      <Solid Type="RectangularCuboid" SizeX="450" SizeY="300" SizeZ ="250" Color="[Color2]">
+        <Origin X="300" Y="-300" Z="[Korkeusasema]" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>-->
+    </Geometry>
+  </Component>
+  
+  <Component Name="Taulu-TV, vasen" NameSpace="Valos.Components.Huonekalut" Description="Taulu-TV">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Taulu-TV"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="700" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="1100"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="50"/>
+      <Tasokorkeus Label="Tasokorkeus" Type="Double" DefaultValue="600" />
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!--taulu TV-->
+    <Geometry Grade="Schematic">
+      <!--TV runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Tasokorkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--ruutu-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-30" SizeY="[Korkeus]-30" SizeZ ="5" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]" Z="[Tasokorkeus]+[Korkeus]/2" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Jalusta-TV, vasen" NameSpace="Valos.Components.Huonekalut" Description="Jalusta-TV">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Jalusta-TV"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="700" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="1100"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="50"/>
+      <Jalustakorkeus Label="Jalustakorkeus" Type="Double" DefaultValue="300" />
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- jalusta TV-->
+    <Geometry Grade="Schematic">
+      <!-- jalusta-->
+      <Solid Type="RectangularCuboid" SizeX="400" SizeY="300" SizeZ ="20" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="[Jalustakorkeus]+300" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!--TV runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Jalustakorkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--ruutu-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-30" SizeY="[Korkeus]-30" SizeZ ="5" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]" Z="[Jalustakorkeus]+[Korkeus]/2" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Pyykinpesukone" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Sivusta täytettävä pyykkikone">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Pesukone"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Luukun väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x850-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="460" SizeZ ="150" >
+         <Origin X="-300" Y="290" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--kone-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="520" SizeZ ="700" >
+        <Origin X="-300" Y="260" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Täyttöaukko-->
+      <Solid Type="Cylinder" BooleanOperation="Primary" Diameter="400" Length="30" Color="[Color2]">
+        <Origin X="-300" Y="0" Z="500" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+        <Solid Type="Cylinder" BooleanOperation="SubtractionDynamic" Diameter="0.5*[SizeX]" Length="2*[SizeY]" >
+          <Origin X="0" Y="0" Z="0" />
+          <Xaxis X="100" Y="0" Z="0" />
+          <Yaxis X="0" Y="100" Z="0" />
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Kuivausrumpu" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Kuivausrumpu">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Kuivausrumpu"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Luukun väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Korkeusasema Label="Korkeusasema" Type="Double" DefaultValue="700" />
+    </Attributes>
+    <!-- 600x520x700-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="460" SizeZ ="150" >
+        <Origin X="-300" Y="290" Z="[Korkeusasema]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--kone-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="520" SizeZ ="700" >
+        <Origin X="-300" Y="260" Z="[Korkeusasema]+150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Täyttöluukku-->
+      <Solid Type="Cylinder" Diameter="400" Length="30" Color="[Color2]">
+        <Origin X="-300" Y="0" Z="[Korkeusasema]+500" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+        <!-- Täyttöaukko
+        <Solid Type="Cylinder" BooleanOperation="SubtractionDynamic" Diameter="0.5*[SizeX]" Length="2*[SizeY]" >
+          <Origin X="0" Y="0" Z="0" />
+          <Xaxis X="100" Y="0" Z="0" />
+          <Yaxis X="0" Y="100" Z="0" />
+        </Solid>-->
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Astianpesukone" NameSpace="Valos.Components.Keittiökalusteet" Description="Astianpesukone">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Astianpesukone"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Avauskahvan väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="520" SizeZ ="150" >
+        <Origin X="0" Y="40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- kone-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="600" SizeZ ="750" >
+        <Origin X="0" Y="0" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>      
+      <!-- paneeli-->
+      <Solid Type="RectangularCuboid" SizeX="580" SizeY="120" SizeZ ="310" Color="[Color]">
+        <Origin X="0" Y="0" Z="810" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+       </Solid>
+      <!-- kahva-->
+      <Solid Type="RectangularCuboid" SizeX="160" SizeY="80" SizeZ ="312" Color="[Color2]">
+        <Origin X="0" Y="0" Z="790" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+       </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Astianpesukone2" NameSpace="Valos.Components.Keittiökalusteet" Description="Astianpesukone">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Astianpesukone"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Avauskahvan väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="520" SizeZ ="150" >
+        <Origin X="300" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- kone-->
+      <Solid Type="RectangularCuboid" SizeX="600" SizeY="600" SizeZ ="710" >
+        <Origin X="300" Y="-300" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- paneeli-->
+      <Solid Type="RectangularCuboid" SizeX="580" SizeY="120" SizeZ ="310" Color="[Color]">
+        <Origin X="300" Y="-300" Z="790" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- kahva-->
+      <Solid Type="RectangularCuboid" SizeX="160" SizeY="80" SizeZ ="312" Color="[Color2]">
+        <Origin X="300" Y="-300" Z="790" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Konevaraus" NameSpace="Valos.Components.Keittiökalusteet" Description="Sähkölaite">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Sähkölaite"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Korkeusasema Label="Korkeusasema" Type="Double" DefaultValue="700" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- kone-->
+      <Solid Type="RectangularCuboid" SizeX="[Syvyys]" SizeY="[Leveys]" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Korkeusasema]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Jääkaappi 180" NameSpace="Valos.Components.Keittiökalusteet" Description="Jääkaappi 180">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Jääkaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1800" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+      <Color3 Label="Avauskahvan väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="300" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin X="300" Y="-300" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-150" SizeZ ="50" Color="[Color2]">
+        <Origin X="300" Y="-[Syvyys]/2-300" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- kahva-->
+      <Solid Type="RectangularCuboid" SizeX="20" SizeY="600" SizeZ ="20" Color="[Color3]">
+        <Origin X="60" Y="-[Syvyys]/2-350" Z="[Korkeus]/2+150" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Jääkaappi 210" NameSpace="Valos.Components.Keittiökalusteet" Description="Jääkaappi 210">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Jääkaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="2100" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="590"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+      <Color3 Label="Avauskahvan väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="300" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--runko<Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin X="300" Y="-300" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin X="300" Y="-[Syvyys]/2-300" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- kahva-->
+      <Solid Type="RectangularCuboid" SizeX="20" SizeY="600" SizeZ ="20" Color="[Color3]">
+        <Origin X="60" Y="-[Syvyys]/2-350" Z="[Korkeus]/2+150" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Jääkaappi, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Jääkaappi 210">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Jääkaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="2100" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="590"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+      <Color3 Label="Avauskahvan väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2+40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2-300" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- kahva-->
+      <Solid Type="RectangularCuboid" SizeX="20" SizeY="600" SizeZ ="20" Color="[Color3]">
+        <Origin X="60" Y="-[Syvyys]/2-350" Z="[Korkeus]/2+150" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Jääkaappi side-by-side" NameSpace="Valos.Components.Keittiökalusteet" Description="Jääkaappi side-by-side">
+    <Attributes>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+      <Color3 Label="Avauskahvan väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="1200" SizeY="600-80" SizeZ ="150" >
+        <Origin X="600" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="1200" SizeY="600" SizeZ ="2100-150" >
+        <Origin X="600" Y="-300" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi 1-->
+      <Solid Type="RectangularCuboid" SizeX="577" SizeY="1950" SizeZ ="50" Color="[Color2]">
+        <Origin X="300" Y="-600" Z="1125" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- kahva-->
+      <Solid Type="RectangularCuboid" SizeX="20" SizeY="600" SizeZ ="20" Color="[Color3]">
+        <Origin X="550" Y="-650" Z="1125" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- ovi 2-->
+      <Solid Type="RectangularCuboid" SizeX="577" SizeY="1950" SizeZ ="50" Color="[Color2]">
+        <Origin X="900" Y="-600" Z="1125" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- kahva-->
+      <Solid Type="RectangularCuboid" SizeX="20" SizeY="600" SizeZ ="20" Color="[Color3]">
+        <Origin X="650" Y="-650" Z="1125" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Työtaso, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Työtaso">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Työtaso"/>
+      <Korkeus Label="Mitta" Type="Double" DefaultValue="900" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>     
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFEBD2" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="40" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Mitta]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Taso, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Taso">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Taso"/>
+      <Paksuus Label="Paksuus" Type="Double" DefaultValue="40" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="860"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFEBD2" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--taso-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Paksuus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Korkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Hyllytasot 5, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Hyllytasot">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hyllytasot"/>
+      <Paksuus Label="Paksuus" Type="Double" DefaultValue="30" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="1200"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="400"/>
+      <Korkeus Label="Alin taso, korkeus" Type="Double" DefaultValue="500"/>
+      <Hyllyvali Label="Hyllyväli" Type="Double" DefaultValue="400"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--taso1-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Paksuus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Korkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--taso2-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Paksuus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Korkeus]+[Hyllyvali]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--taso3-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Paksuus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Korkeus]+[Hyllyvali]*2"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--taso4-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Paksuus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Korkeus]+[Hyllyvali]*3"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--taso5-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Paksuus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Korkeus]+[Hyllyvali]*4"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Ripustustankohylly, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Ripustustankohylly">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Ripustustankohylly"/>
+      <Paksuus Label="Paksuus" Type="Double" DefaultValue="30" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="1200"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="400"/>
+      <Korkeus Label="Taso, korkeus" Type="Double" DefaultValue="2100"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Tangon väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--taso1-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Paksuus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="[Korkeus]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Tanko-->
+      <Solid Type="Cylinder" Diameter="40" Length="[Leveys]" Color="[Color2]">
+        <Origin X="[Leveys]" Y="-[Syvyys]/2" Z="[Korkeus]-100"/>
+        <Xaxis X="0" Y="100" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Lattiakaappi, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Lattiakaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Lattiakaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="860" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Lattiakaappi, oikea" NameSpace="Valos.Components.Keittiökalusteet" Description="Lattiakaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Lattiakaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2+40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Lattia-avokaappi, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Lattia-avokaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Avokaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="300" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin X="300" Y="-300" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-40" SizeY="[Syvyys]+40" SizeZ ="[Korkeus]-190" >
+          <Origin X="0" Y="-50" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Takkavaraus, oikea" NameSpace="Valos.Components.Tulisijat" Description="Takkavaraus">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Takkavaraús"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1800" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="900"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="700"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- takkarunko-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- pesäaukko
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-400" SizeY="[Syvyys]+100" SizeZ ="[Korkeus]-1000" -->
+         <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="600" SizeY="[Syvyys]+10" SizeZ ="600" > 
+        <Origin X="0" Y="-50" Z="500"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Lattia-avokaappi, oikea" NameSpace="Valos.Components.Keittiökalusteet" Description="Lattia-avokaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Avokaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="-300" Y="-260" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin X="-300" Y="-300" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-40" SizeY="[Syvyys]+40" SizeZ ="[Korkeus]-190" >
+          <Origin X="0" Y="-50" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Liesituuletin, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Liesituuletin">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Liesituuletin"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--tuuletin-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-900" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--yläosa-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-300" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+150" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+       <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-0" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Liesituuletin, oikea" NameSpace="Valos.Components.Keittiökalusteet" Description="Liesituuletin">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Liesituuletin"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--tuuletin-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-900" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--yläosa-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-300" SizeZ ="[Korkeus]" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2+150" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-0" SizeZ ="20" Color="[Color2]">
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="1900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Seinäkaappi, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Seinäkaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Seinäkaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="300"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2-150" Z="[Korkeus]/2+1400" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Seinäkaappi, oikea" NameSpace="Valos.Components.Keittiökalusteet" Description="Seinäkaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Seinäkaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="300"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]" SizeZ ="20" Color="[Color2]">
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2-150" Z="[Korkeus]/2+1400" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Seinäavokaappi, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Seinäavokaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Avokaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="300"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-40" SizeY="[Syvyys]+40" SizeZ ="[Korkeus]-40" >
+          <Origin X="0" Y="-50" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Seinäavokaappi, oikea" NameSpace="Valos.Components.Keittiökalusteet" Description="Seinäavokaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Avokaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="300"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin  X="-[Leveys]/2" Y="-[Syvyys]/2" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-40" SizeY="[Syvyys]+40" SizeZ ="[Korkeus]-40" >
+          <Origin X="0" Y="-50" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Mikrokaappi, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Mikrokaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Mikrokaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="1000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="300"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+     <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-400" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2-150" Z="[Korkeus]/2+1600" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2" Z="1400"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-40" SizeY="[Syvyys]+40" SizeZ ="[Korkeus]-600" >
+          <Origin X="0" Y="-50" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Korkeakaappi, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Korkeakaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Lattiakaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="2400" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2+40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-4" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2-300" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Korkeakaappi, oikea" NameSpace="Valos.Components.Keittiökalusteet" Description="Korkeakaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Lattiakaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="2400" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2+40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin  X="-[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-4" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2-300" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Korkea avokaappi, vasen" NameSpace="Valos.Components.Keittiökalusteet" Description="Korkea avokaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Avokaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="2400" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <!--<Origin X="300" Y="-300" Z="0"/>-->
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-40" SizeY="[Syvyys]+40" SizeZ ="[Korkeus]-500" >
+          <Origin X="0" Y="-50" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-4" SizeY="[Korkeus]-1900" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2-300" Z="[Korkeus]/2+950" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Tiskiallaskaappi" NameSpace="Valos.Components.Keittiökalusteet" Description="Tiskiallaskaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Tiskiallaskaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-355" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi -->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-200" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]" Z="[Korkeus]/2+50" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- Hana-->
+      <Solid Type="Cylinder" Diameter="50" Length="100" >
+        <Origin X="[Leveys]/2" Y="-50" Z="[Korkeus]" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="300" >
+        <Origin X="[Leveys]/2" Y="-30" Z="[Korkeus]+0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="10" Length="150" >
+        <Origin X="[Leveys]/2" Y="-30" Z="[Korkeus]+50" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="25" >
+        <Origin X="[Leveys]/2" Y="-235" Z="[Korkeus]+215" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="-100" Z="100" />
+      </Solid>
+      <!-- allas-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-700" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-100" SizeY="[Syvyys]-150" SizeZ ="[Korkeus]-700" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <!-- aukko
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]/2-40" SizeY="[Syvyys]-150" SizeZ ="[Korkeus]-700" >
+          <Origin X="140" Y="-50" Z="50"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>-->
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Tiskiallaskaappi, kansi" NameSpace="Valos.Components.Keittiökalusteet" Description="Tiskiallaskaappi, kansi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Tiskiallaskaappi, kansi"/>
+      <!--<Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />-->
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+      <Color3 Label="Kannen väri" Type="Color" DefaultValue="#FFFFEBD2" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="860-300" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi -->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="860-145" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]" Z="860/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- Hana-->
+      <Solid Type="Cylinder" Diameter="50" Length="100" >
+        <Origin X="[Leveys]/2" Y="-50" Z="900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="300" >
+        <Origin X="[Leveys]/2" Y="-30" Z="900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="10" Length="150" >
+        <Origin X="[Leveys]/2" Y="-30" Z="900+50" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="25" >
+        <Origin X="[Leveys]/2" Y="-235" Z="900+215" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="-100" Z="100" />
+      </Solid>
+      <!-- allas-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="860-700" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>   
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-100" SizeY="[Syvyys]-150" SizeZ ="860-700" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    <!-- kansi -->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="40" Color="[Color3]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="860"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-100" SizeY="[Syvyys]-150" SizeZ ="40" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Tiskiallaskaappi, kansi, allas 500" NameSpace="Valos.Components.Keittiökalusteet" Description="Tiskiallaskaappi, kansi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Tiskiallaskaappi, kansi"/>
+      <!--<Korkeus Label="Korkeus" Type="Double" DefaultValue="900" />-->
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+      <Color3 Label="Kannen väri" Type="Color" DefaultValue="#FFFFEBD2" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-80" SizeZ ="150" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="860-300" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi -->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="860-145" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]" Z="860/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- Hana-->
+      <Solid Type="Cylinder" Diameter="50" Length="100" >
+        <Origin X="[Leveys]/2" Y="-50" Z="900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="300" >
+        <Origin X="[Leveys]/2" Y="-30" Z="900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="10" Length="150" >
+        <Origin X="[Leveys]/2" Y="-30" Z="900+50" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="25" >
+        <Origin X="[Leveys]/2" Y="-235" Z="900+215" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="-100" Z="100" />
+      </Solid>
+      <!-- allas-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="860-700" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>   
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="500" SizeY="400" SizeZ ="860-700" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    <!-- kansi -->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="40" Color="[Color3]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="860"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="500" SizeY="400" SizeZ ="40" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Pesuallaskaappi" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Pesuallaskaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Pesuallaskaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="850" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="500"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="[Leveys]-50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="[Leveys]-50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-305" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi -->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-320" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]" Z="[Korkeus]/2-10" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- Hana-->
+      <Solid Type="Cylinder" Diameter="50" Length="100" >
+        <Origin X="[Leveys]/2" Y="-50" Z="[Korkeus]" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="300" >
+        <Origin X="[Leveys]/2" Y="-30" Z="[Korkeus]+0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="10" Length="150" >
+        <Origin X="[Leveys]/2" Y="-30" Z="[Korkeus]+50" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="25" >
+        <Origin X="[Leveys]/2" Y="-235" Z="[Korkeus]+215" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="-100" Z="100" />
+      </Solid>
+      <!-- allas-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-700" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-50" SizeY="[Syvyys]-150" SizeZ ="[Korkeus]-700" >
+          <Origin X="0" Y="-50" Z="50"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Pesuallaskaappi, taso" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Pesuallaskaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Pesuallaskaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="850" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="900"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="[Leveys]-50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="[Leveys]-50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-305" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi -->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-3" SizeY="[Korkeus]-320" SizeZ ="20" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="-[Syvyys]" Z="[Korkeus]/2-10" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- Hana-->
+      <Solid Type="Cylinder" Diameter="50" Length="100" >
+        <Origin X="[Leveys]/2" Y="-50" Z="[Korkeus]" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="300" >
+        <Origin X="[Leveys]/2" Y="-30" Z="[Korkeus]+0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="10" Length="150" >
+        <Origin X="[Leveys]/2" Y="-30" Z="[Korkeus]+50" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="25" >
+        <Origin X="[Leveys]/2" Y="-235" Z="[Korkeus]+215" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="-100" Z="100" />
+      </Solid>
+      <!-- allas-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-700" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="500" SizeY="350" SizeZ ="[Korkeus]-700" >
+          <Origin X="0" Y="-50" Z="50"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Pesuallas" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Pesuallas">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Pesuallas"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="850" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="500"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- Hana-->
+      <Solid Type="Cylinder" Diameter="50" Length="100" >
+        <Origin X="[Leveys]/2" Y="-50" Z="[Korkeus]" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="300" >
+        <Origin X="[Leveys]/2" Y="-30" Z="[Korkeus]+0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="10" Length="150" >
+        <Origin X="[Leveys]/2" Y="-30" Z="[Korkeus]+50" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="25" >
+        <Origin X="[Leveys]/2" Y="-235" Z="[Korkeus]+215" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="-100" Z="100" />
+      </Solid>
+     <!-- Viemäriputki-->
+      <Solid Type="Cylinder" Diameter="100" Length="10" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+100" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="700" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+100" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- allas-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-700" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-50" SizeY="[Syvyys]-150" SizeZ ="[Korkeus]-700" >
+          <Origin X="0" Y="-50" Z="50"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="WC-istuin, vasen" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="WC-istuin">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="WC-istuin"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="800" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="400"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="670"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 670x400x800-->
+    <Geometry Grade="Schematic">
+      <!-- jalusta-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-152" SizeY="[Syvyys]-310" SizeZ ="300" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+93" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Pyöristys-->
+      <Solid Type="Cylinder" Diameter="[Leveys]-150" Length="300" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2-100" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--vesisäiliö-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]-510" SizeZ ="400" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+255" Z="405"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- Vetonuppi-->
+      <Solid Type="Cylinder" Diameter="40" Length="20" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+250" Z="800" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!--istuin-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]-200" SizeZ ="100" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2+100" Z="300"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-100" SizeY="[Syvyys]-400" SizeZ ="100" >
+          <Origin X="0" Y="-100" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+          <!-- viemäriaukko-->
+          <!--<Solid Type="Cylinder"  BooleanOperation="SubtractionDynamic" Diameter="[Leveys]-280" Length="400" >
+            <Origin X="0" Y="-50" Z="-300"/>
+            <Xaxis X="100" Y="0" Z="0"/>
+            <YAxis X="0" Y="100" Z="0"/>
+          </Solid>-->
+        </Solid>
+      </Solid>
+      <!-- istuinpyöristys-->
+		<Solid Type="Cylinder"  BooleanOperation="Primary" Diameter="[Leveys]" Length="100" >
+			<Origin X="[Leveys]/2" Y="-[Syvyys]+200" Z="300"/>
+			<Xaxis X="100" Y="0" Z="0"/>
+			<YAxis X="0" Y="100" Z="0"/>
+			<Solid Type="Cylinder"  BooleanOperation="SubtractionDynamic" Diameter="[Leveys]-100" Length="150" >
+				<Origin X="0" Y="0" Z="20"/>
+				<Xaxis X="100" Y="0" Z="0"/>
+				<YAxis X="0" Y="100" Z="0"/>
+			</Solid>
+      <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-100" SizeY="[Leveys]+100" SizeZ ="100" >
+				<Origin X="0" Y="[Leveys]/2+50" Z="20"/>
+				<Xaxis X="100" Y="0" Z="0"/>
+				<YAxis X="0" Y="100" Z="0"/>
+			</Solid>
+		</Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Saunan lauteet, vasen" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Saunan lauteet">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Saunan lauteet"/>
+      <!--Korkeus Label="Korkeus" Type="Double" DefaultValue="10" />-->
+      <Leveys Label="Leveys" Type="Double" DefaultValue="2100"/>
+      <!--<Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>-->
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFEBD2" />
+    </Attributes>
+    <!-- lauteet kolmessa tasossa-->
+    <Geometry Grade="Schematic">
+      <!--istuintaso-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="600" SizeZ ="100" >
+        <Origin X="[Leveys]/2" Y="-300" Z="1200"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--jalkataso-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="400" SizeZ ="100" >
+        <Origin X="[Leveys]/2" Y="-800" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- kaide-->
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="600" >
+        <Origin X="[Leveys]/2+150" Y="-1025" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="600" >
+        <Origin X="[Leveys]-150" Y="-1025" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]/2" SizeY="100" SizeZ ="30" >
+        <Origin X="[Leveys]*3/4" Y="-1025" Z="1270"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--nousutaso-->
+      <Solid Type="RectangularCuboid" SizeX="700" SizeY="450" SizeZ ="100" >
+        <Origin X="350" Y="-1200" Z="350"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- jalat-->
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="340" >
+        <Origin X="50" Y="-1025" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="340" >
+        <Origin X="50" Y="-1375" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="340" >
+        <Origin X="650" Y="-1025" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="340" >
+        <Origin X="650" Y="-1375" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>      
+    </Geometry>    
+  </Component>
+
+  <Component Name="Saunan lauteet, oikea" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Saunan lauteet">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Saunan lauteet"/>
+      <!--Korkeus Label="Korkeus" Type="Double" DefaultValue="10" />-->
+      <Leveys Label="Leveys" Type="Double" DefaultValue="2100"/>
+      <!--<Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>-->
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFEBD2" />
+    </Attributes>
+    <!-- lauteet kolmessa tasossa-->
+    <Geometry Grade="Schematic">
+      <!--istuintaso-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="600" SizeZ ="100" >
+        <Origin X="-[Leveys]/2" Y="-300" Z="1200"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--jalkataso-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="400" SizeZ ="100" >
+        <Origin X="-[Leveys]/2" Y="-800" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- kaide-->
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="600" >
+        <Origin X="-[Leveys]/2-150" Y="-1025" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="600" >
+        <Origin X="-[Leveys]+150" Y="-1025" Z="700"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]/2" SizeY="100" SizeZ ="30" >
+        <Origin X="-[Leveys]*3/4" Y="-1025" Z="1270"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--nousutaso-->
+      <Solid Type="RectangularCuboid" SizeX="700" SizeY="450" SizeZ ="100" >
+        <Origin X="-350" Y="-1200" Z="350"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- jalat-->
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="340" >
+        <Origin X="-50" Y="-1025" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="340" >
+        <Origin X="-50" Y="-1375" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="340" >
+        <Origin X="-650" Y="-1025" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="50" SizeY="50" SizeZ ="340" >
+        <Origin X="-650" Y="-1375" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Puukiuas" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Puukiuas">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Puukiuas"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Avauskahvan väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!-- Sokkeli-->
+      <Solid Type="RectangularCuboid" SizeX="400" SizeY="400" SizeZ ="50" >
+        <Origin X="40" Y="40" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- luukku-->
+      <Solid Type="RectangularCuboid" SizeX="300" SizeY="300" SizeZ ="300" Color="[Color2]">
+        <Origin X="0" Y="20" Z="300" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+      <!-- kiuas-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="500" SizeY="500" SizeZ ="800" >
+        <Origin X="0" Y="0" Z="50"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="400" SizeY="400" SizeZ ="900" >
+          <Origin X="0" Y="0" Z="600"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Sähkökiuas" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Sähkökiuas">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Sähkökiuas"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="600" />
+      <Leveys Label="Syvyys" Type="Double" DefaultValue="300"/>
+      <Syvyys Label="Leveys" Type="Double" DefaultValue="400"/>
+      <Color Label="Rungon väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="2. väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- alaosa-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-100" SizeY="[Syvyys]-100" SizeZ ="100" >
+        <Origin X="[Leveys]/2" Y="[Syvyys]/2" Z="200"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- runko-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="350" Color="[Color2]">
+        <Origin X="[Leveys]/2" Y="[Syvyys]/2" Z="300"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-50" SizeY="[Syvyys]-69" SizeZ ="100" Color="[Color2]">
+          <Origin X="0" Y="0" Z="250"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+      <!-- kiviallas-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]-60" SizeY="[Syvyys]-60" SizeZ ="129" >
+        <Origin X="[Leveys]/2-20" Y="[Syvyys]/2" Z="597"/>
+        <Xaxis X="100" Y="0" Z="-50"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!-- aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-70" SizeY="[Syvyys]-70" SizeZ ="130" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Suihkuallaskaappi" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Suihkuallaskaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Suihkuallaskaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="100" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="900"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="900"/>
+      <DIA Label="Nurkan pyöreys" Type="Double" DefaultValue="100" />
+      <!--<Korkeus Label="Korkeus" Type="Double" DefaultValue="200" />-->
+      <Reuna Label="Reuna" Type="Double" DefaultValue="50"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="[Leveys]-50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="[Leveys]-50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- runko-->
+      <Solid Type="ExtruredSection" BooleanOperation="Primary" Length="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="50"/>
+        <!-- <Origin X="0" Y="0" Z="0"/>-->
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <Polygon>
+          <!-- 0-90-->
+          <Point X="COS(PI()*0.0)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.0)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.05)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.05)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.1)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.1)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.15)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.15)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.2)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.2)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.25)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.25)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.3)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.3)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.35)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.35)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.4)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.4)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.45)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.45)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.5)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2" /> 
+          <!-- 90-180-->
+          <Point X="COS(PI()*0.5)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.55)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.55)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.6)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.6)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.65)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.65)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.7)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.7)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.75)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.75)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.8)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.8)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.85)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.85)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.9)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.9)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.95)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.95)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2+[Syvyys]/2.2" />
+          <!-- 180-270-->
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.1)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.1)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.15)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.15)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.2)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.2)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.25)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.25)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.3)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.3)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.35)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.35)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.4)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.4)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.45)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.45)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.5)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2" />
+          <!-- 270-360-->
+          <Point X="COS(PI()*1.5)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.55)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.55)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.6)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.6)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.65)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.65)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.7)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.7)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.75)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.75)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.8)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.8)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.85)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.85)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.9)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.9)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.95)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.95)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*2.0)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*2.0)*[DIA]/2-[Syvyys]/2.2" />
+        </Polygon>
+        <Solid Type="ExtruredSection" BooleanOperation="SubtractionDynamic" Length="[Korkeus]" >
+          <Origin X="0" Y="0" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+          <Polygon>
+            <!-- 0-90 -->
+            <Point X="COS(PI()*0.0)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.0)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.05)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.05)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.1)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.1)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.15)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.15)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.2)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.2)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.25)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.25)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.3)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.3)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.35)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.35)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.4)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.4)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.45)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.45)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.5)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <!-- 90-180-->
+            <Point X="COS(PI()*0.5)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.55)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.55)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.6)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.6)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.65)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.65)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.7)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.7)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.75)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.75)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.8)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.8)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.85)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.85)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.9)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.9)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.95)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.95)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <!-- 180-270-->
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.1)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.1)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.15)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.15)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.2)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.2)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.25)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.25)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.3)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.3)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.35)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.35)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.4)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.4)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.45)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.45)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.5)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.5)*[DIA]/2.2-[Syvyys]/2.2+[Reuna]" />
+            <!-- 270-360-->
+            <Point X="COS(PI()*1.5)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.55)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.55)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.6)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.6)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.65)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.65)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.7)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.7)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.75)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.75)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.8)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.8)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.85)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.85)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.9)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.9)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.95)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.95)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*2.0)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*2.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+          </Polygon>
+        </Solid>
+      </Solid>         
+      <!-- seinä1-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="10" SizeZ ="1800" Opacity="0.5" >
+        <Origin X="[Leveys]/2" Y="0" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- seinä2-->
+      <Solid Type="RectangularCuboid" SizeX="10" SizeY="[Syvyys]" SizeZ ="1800" Opacity="0.5" >
+        <Origin X="[Leveys]" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- seinä3-->
+      <Solid Type="RectangularCuboid" SizeX="10" SizeY="[Syvyys]" SizeZ ="1800" Opacity="0.5" >
+        <Origin X="0" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--suihku -->
+      <Solid Type="Cylinder" Diameter="120" Length="20" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="[Syvyys]/2" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1910" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="1110" >
+        <Origin X="[Leveys]/2" Y="-20" Z="800" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="700" >
+        <Origin X="[Leveys]/2+20" Y="-30" Z="100" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="700" >
+        <Origin X="[Leveys]/2-20" Y="-30" Z="100" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>    
+      <Solid Type="Cylinder" Diameter="50" Length="200" >
+        <Origin X="[Leveys]/2+100" Y="-30" Z="800" />
+        <Xaxis X="0" Y="100" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Kylpyamme" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Kylpyamme">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Kylpyamme"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="500" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="1600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="700"/>
+      <DIA Label="Nurkan pyöreys" Type="Double" DefaultValue="100" />
+      <!--<Korkeus Label="Korkeus" Type="Double" DefaultValue="200" />-->
+      <Reuna Label="Reuna" Type="Double" DefaultValue="50"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="[Leveys]-50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="[Leveys]-50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- runko-->
+      <Solid Type="ExtruredSection" BooleanOperation="Primary" Length="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="50"/>
+        <!-- <Origin X="0" Y="0" Z="0"/>-->
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <Polygon>
+          <!-- 0-90-->
+          <Point X="COS(PI()*0.0)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.0)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.05)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.05)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.1)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.1)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.15)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.15)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.2)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.2)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.25)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.25)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.3)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.3)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.35)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.35)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.4)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.4)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.45)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.45)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.5)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2" />
+          <!-- 90-180-->
+          <Point X="COS(PI()*0.5)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.55)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.55)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.6)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.6)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.65)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.65)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.7)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.7)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.75)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.75)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.8)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.8)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.85)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.85)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.9)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.9)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.95)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.95)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2+[Syvyys]/2.2" />
+          <!-- 180-270-->
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.1)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.1)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.15)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.15)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.2)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.2)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.25)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.25)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.3)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.3)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.35)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.35)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.4)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.4)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.45)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.45)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.5)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2" />
+          <!-- 270-360-->
+          <Point X="COS(PI()*1.5)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.55)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.55)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.6)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.6)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.65)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.65)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.7)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.7)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.75)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.75)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.8)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.8)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.85)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.85)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.9)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.9)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.95)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.95)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*2.0)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*2.0)*[DIA]/2-[Syvyys]/2.2" />
+        </Polygon>
+        <Solid Type="ExtruredSection" BooleanOperation="SubtractionDynamic" Length="[Korkeus]" >
+          <Origin X="0" Y="0" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+          <Polygon>
+            <!-- 0-90 -->
+            <Point X="COS(PI()*0.0)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.0)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.05)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.05)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.1)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.1)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.15)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.15)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.2)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.2)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.25)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.25)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.3)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.3)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.35)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.35)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.4)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.4)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.45)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.45)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.5)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <!-- 90-180-->
+            <Point X="COS(PI()*0.5)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.55)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.55)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.6)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.6)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.65)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.65)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.7)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.7)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.75)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.75)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.8)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.8)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.85)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.85)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.9)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.9)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.95)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.95)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <!-- 180-270-->
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.1)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.1)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.15)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.15)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.2)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.2)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.25)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.25)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.3)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.3)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.35)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.35)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.4)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.4)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.45)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.45)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.5)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.5)*[DIA]/2.2-[Syvyys]/2.2+[Reuna]" />
+            <!-- 270-360-->
+            <Point X="COS(PI()*1.5)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.55)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.55)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.6)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.6)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.65)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.65)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.7)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.7)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.75)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.75)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.8)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.8)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.85)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.85)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.9)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.9)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.95)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.95)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*2.0)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*2.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+          </Polygon>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+
+  <Component Name="Poreamme" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Poreamme">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Poreamme"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="400" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="1200"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="1200"/>
+      <DIA Label="Nurkan pyöreys" Type="Double" DefaultValue="100" />
+      <!--<Korkeus Label="Korkeus" Type="Double" DefaultValue="200" />-->
+      <Reuna Label="Reuna" Type="Double" DefaultValue="50"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="[Leveys]-50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="50" >
+        <Origin X="[Leveys]-50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!-- runko-->
+      <Solid Type="ExtruredSection" BooleanOperation="Primary" Length="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="50"/>
+        <!-- <Origin X="0" Y="0" Z="0"/>-->
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <Polygon>
+          <!-- 0-90-->
+          <Point X="COS(PI()*0.0)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.0)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.05)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.05)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.1)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.1)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.15)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.15)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.2)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.2)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.25)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.25)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.3)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.3)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.35)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.35)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.4)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.4)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.45)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.45)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.5)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2" />
+          <!-- 90-180-->
+          <Point X="COS(PI()*0.5)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.55)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.55)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.6)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.6)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.65)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.65)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.7)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.7)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.75)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.75)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.8)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.8)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.85)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.85)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.9)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.9)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*0.95)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*0.95)*[DIA]/2+[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2+[Syvyys]/2.2" />
+          <!-- 180-270-->
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.1)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.1)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.15)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.15)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.2)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.2)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.25)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.25)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.3)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.3)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.35)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.35)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.4)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.4)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.45)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.45)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.5)*[DIA]/2-[Leveys]/2.2" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2" />
+          <!-- 270-360-->
+          <Point X="COS(PI()*1.5)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.55)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.55)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.6)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.6)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.65)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.65)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.7)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.7)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.75)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.75)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.8)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.8)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.85)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.85)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.9)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.9)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*1.95)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*1.95)*[DIA]/2-[Syvyys]/2.2" />
+          <Point X="COS(PI()*2.0)*[DIA]/2+[Leveys]/2.2" Y="SIN(PI()*2.0)*[DIA]/2-[Syvyys]/2.2" />
+        </Polygon>
+        <Solid Type="ExtruredSection" BooleanOperation="SubtractionDynamic" Length="[Korkeus]" >
+          <Origin X="0" Y="0" Z="20"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+          <Polygon>
+            <!-- 0-90 -->
+            <Point X="COS(PI()*0.0)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.0)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.05)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.05)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.1)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.1)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.15)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.15)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.2)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.2)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.25)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.25)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.3)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.3)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.35)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.35)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.4)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.4)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.45)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.45)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.5)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <!-- 90-180-->
+            <Point X="COS(PI()*0.5)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.5)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.55)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.55)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.6)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.6)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.65)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.65)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.7)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.7)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.75)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.75)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.8)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.8)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.85)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.85)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.9)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.9)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*0.95)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*0.95)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2+[Syvyys]/2.2-[Reuna]" />
+            <!-- 180-270-->
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.0)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.1)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.1)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.15)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.15)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.2)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.2)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.25)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.25)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.3)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.3)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.35)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.35)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.4)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.4)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.45)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.45)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.5)*[DIA]/2-[Leveys]/2.2+[Reuna]" Y="SIN(PI()*1.5)*[DIA]/2.2-[Syvyys]/2.2+[Reuna]" />
+            <!-- 270-360-->
+            <Point X="COS(PI()*1.5)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.5)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.55)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.55)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.6)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.6)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.65)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.65)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.7)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.7)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.75)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.75)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.8)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.8)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.85)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.85)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.9)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.9)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*1.95)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*1.95)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+            <Point X="COS(PI()*2.0)*[DIA]/2+[Leveys]/2.2-[Reuna]" Y="SIN(PI()*2.0)*[DIA]/2-[Syvyys]/2.2+[Reuna]" />
+          </Polygon>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Ilmanvaihtoventtiili, vasen" NameSpace="Valos.Components.LVI" Description="Ilmanvaihtoventtiili">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Ilmanvaihtoventtiili"/>
+      <DIA Label="Halkaisija" Type="Double" DefaultValue="300" />
+      <Pituus Label="Pituus" Type="Double" DefaultValue="100" />
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Korkeusasema Label="Korkeusasema" Type="Double" DefaultValue="2100" />
+    </Attributes>
+    <Geometry Grade="Schematic">
+      <Solid Type="ExtruredSection" Length="[Pituus]" >
+        <Origin X="COS(PI()*1.1)*[DIA]/2" Y="-SIN(PI()*1.1)*[DIA]/2" Z="[Korkeusasema]"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <Polygon>
+          <!--<Point X="COS(0)*[DIA]/2" Y="SIN(0)*[DIA]/2" />
+          <Point X="COS(PI()*0.1)*[DIA]/2" Y="SIN(PI()*0.1)*[DIA]/2" />
+          <Point X="COS(PI()*0.2)*[DIA]/2" Y="SIN(PI()*0.2)*[DIA]/2" />
+          <Point X="COS(PI()*0.3)*[DIA]/2" Y="SIN(PI()*0.3)*[DIA]/2" />
+          <Point X="COS(PI()*0.4)*[DIA]/2" Y="SIN(PI()*0.4)*[DIA]/2" />
+          <Point X="COS(PI()*0.5)*[DIA]/2" Y="SIN(PI()*0.5)*[DIA]/2" />
+          <Point X="COS(PI()*0.6)*[DIA]/2" Y="SIN(PI()*0.6)*[DIA]/2" />
+          <Point X="COS(PI()*0.7)*[DIA]/2" Y="SIN(PI()*0.7)*[DIA]/2" />
+          <Point X="COS(PI()*0.8)*[DIA]/2" Y="SIN(PI()*0.8)*[DIA]/2" />
+          <Point X="COS(PI()*0.9)*[DIA]/2" Y="SIN(PI()*0.9)*[DIA]/2" -->
+          <!--<Point X="COS(PI()*1.0)*[DIA]/2" Y="SIN(PI()*1.0)*[DIA]/2" />-->
+          <Point X="COS(PI()*1.1)*[DIA]/2" Y="SIN(PI()*1.1)*[DIA]/2" />
+          <Point X="COS(PI()*1.2)*[DIA]/2" Y="SIN(PI()*1.2)*[DIA]/2" />
+          <Point X="COS(PI()*1.3)*[DIA]/2" Y="SIN(PI()*1.3)*[DIA]/2" />
+          <Point X="COS(PI()*1.4)*[DIA]/2" Y="SIN(PI()*1.4)*[DIA]/2" />
+          <Point X="COS(PI()*1.5)*[DIA]/2" Y="SIN(PI()*1.5)*[DIA]/2" />
+          <Point X="COS(PI()*1.6)*[DIA]/2" Y="SIN(PI()*1.6)*[DIA]/2" />
+          <Point X="COS(PI()*1.7)*[DIA]/2" Y="SIN(PI()*1.7)*[DIA]/2" />
+          <Point X="COS(PI()*1.8)*[DIA]/2" Y="SIN(PI()*1.8)*[DIA]/2" />
+          <Point X="COS(PI()*1.9)*[DIA]/2" Y="SIN(PI()*1.9)*[DIA]/2" />
+          <!--<Point X="COS(PI()*2.0)*[DIA]/2" Y="SIN(PI()*2.0)*[DIA]/2" />-->
+        </Polygon>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  
+
+  <Component Name="Säiliö pystyyn" NameSpace="Valos.Components.LVI" Description="Säiliö">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Säiliö"/>
+      <DIA Label="Halkaisija" Type="Double" DefaultValue="500" />
+      <Pituus Label="Pituus" Type="Double" DefaultValue="2000" />
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <Geometry Grade="Schematic">
+      <Solid Type="ExtruredSection" Length="[Pituus]" >
+        <Origin X="0" Y="0" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <Polygon>
+          <Point X="COS(0)*[DIA]/2" Y="SIN(0)*[DIA]/2" />
+          <Point X="COS(PI()*0.1)*[DIA]/2" Y="SIN(PI()*0.1)*[DIA]/2" />
+          <Point X="COS(PI()*0.2)*[DIA]/2" Y="SIN(PI()*0.2)*[DIA]/2" />
+          <Point X="COS(PI()*0.3)*[DIA]/2" Y="SIN(PI()*0.3)*[DIA]/2" />
+          <Point X="COS(PI()*0.4)*[DIA]/2" Y="SIN(PI()*0.4)*[DIA]/2" />
+          <Point X="COS(PI()*0.5)*[DIA]/2" Y="SIN(PI()*0.5)*[DIA]/2" />
+          <Point X="COS(PI()*0.6)*[DIA]/2" Y="SIN(PI()*0.6)*[DIA]/2" />
+          <Point X="COS(PI()*0.7)*[DIA]/2" Y="SIN(PI()*0.7)*[DIA]/2" />
+          <Point X="COS(PI()*0.8)*[DIA]/2" Y="SIN(PI()*0.8)*[DIA]/2" />
+          <Point X="COS(PI()*0.9)*[DIA]/2" Y="SIN(PI()*0.9)*[DIA]/2" />
+          <Point X="COS(PI()*1.0)*[DIA]/2" Y="SIN(PI()*1.0)*[DIA]/2" />
+          <Point X="COS(PI()*1.1)*[DIA]/2" Y="SIN(PI()*1.1)*[DIA]/2" />
+          <Point X="COS(PI()*1.2)*[DIA]/2" Y="SIN(PI()*1.2)*[DIA]/2" />
+          <Point X="COS(PI()*1.3)*[DIA]/2" Y="SIN(PI()*1.3)*[DIA]/2" />
+          <Point X="COS(PI()*1.4)*[DIA]/2" Y="SIN(PI()*1.4)*[DIA]/2" />
+          <Point X="COS(PI()*1.5)*[DIA]/2" Y="SIN(PI()*1.5)*[DIA]/2" />
+          <Point X="COS(PI()*1.6)*[DIA]/2" Y="SIN(PI()*1.6)*[DIA]/2" />
+          <Point X="COS(PI()*1.7)*[DIA]/2" Y="SIN(PI()*1.7)*[DIA]/2" />
+          <Point X="COS(PI()*1.8)*[DIA]/2" Y="SIN(PI()*1.8)*[DIA]/2" />
+          <Point X="COS(PI()*1.9)*[DIA]/2" Y="SIN(PI()*1.9)*[DIA]/2" />
+          <Point X="COS(PI()*2.0)*[DIA]/2" Y="SIN(PI()*2.0)*[DIA]/2" />
+        </Polygon>
+        </Solid>
+    </Geometry>
+  </Component>
+ 
+  <Component Name="Säiliö vaakaan" NameSpace="Valos.Components.LVI" Description="Säiliö">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Säiliö"/>
+      <DIA Label="Halkaisija" Type="Double" DefaultValue="500" />
+      <Pituus Label="Pituus" Type="Double" DefaultValue="2000" />
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <Geometry Grade="Schematic">
+      <Solid Type="ExtruredSection" Length="[Pituus]" >
+        <Origin X="0" Y="0" Z="0"/>
+        <Xaxis X="0" Y="100" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+        <Polygon>
+          <Point X="COS(0)*[DIA]/2" Y="SIN(0)*[DIA]/2" />
+          <Point X="COS(PI()*0.1)*[DIA]/2" Y="SIN(PI()*0.1)*[DIA]/2" />
+          <Point X="COS(PI()*0.2)*[DIA]/2" Y="SIN(PI()*0.2)*[DIA]/2" />
+          <Point X="COS(PI()*0.3)*[DIA]/2" Y="SIN(PI()*0.3)*[DIA]/2" />
+          <Point X="COS(PI()*0.4)*[DIA]/2" Y="SIN(PI()*0.4)*[DIA]/2" />
+          <Point X="COS(PI()*0.5)*[DIA]/2" Y="SIN(PI()*0.5)*[DIA]/2" />
+          <Point X="COS(PI()*0.6)*[DIA]/2" Y="SIN(PI()*0.6)*[DIA]/2" />
+          <Point X="COS(PI()*0.7)*[DIA]/2" Y="SIN(PI()*0.7)*[DIA]/2" />
+          <Point X="COS(PI()*0.8)*[DIA]/2" Y="SIN(PI()*0.8)*[DIA]/2" />
+          <Point X="COS(PI()*0.9)*[DIA]/2" Y="SIN(PI()*0.9)*[DIA]/2" />
+          <Point X="COS(PI()*1.0)*[DIA]/2" Y="SIN(PI()*1.0)*[DIA]/2" />
+          <Point X="COS(PI()*1.1)*[DIA]/2" Y="SIN(PI()*1.1)*[DIA]/2" />
+          <Point X="COS(PI()*1.2)*[DIA]/2" Y="SIN(PI()*1.2)*[DIA]/2" />
+          <Point X="COS(PI()*1.3)*[DIA]/2" Y="SIN(PI()*1.3)*[DIA]/2" />
+          <Point X="COS(PI()*1.4)*[DIA]/2" Y="SIN(PI()*1.4)*[DIA]/2" />
+          <Point X="COS(PI()*1.5)*[DIA]/2" Y="SIN(PI()*1.5)*[DIA]/2" />
+          <Point X="COS(PI()*1.6)*[DIA]/2" Y="SIN(PI()*1.6)*[DIA]/2" />
+          <Point X="COS(PI()*1.7)*[DIA]/2" Y="SIN(PI()*1.7)*[DIA]/2" />
+          <Point X="COS(PI()*1.8)*[DIA]/2" Y="SIN(PI()*1.8)*[DIA]/2" />
+          <Point X="COS(PI()*1.9)*[DIA]/2" Y="SIN(PI()*1.9)*[DIA]/2" />
+          <Point X="COS(PI()*2.0)*[DIA]/2" Y="SIN(PI()*2.0)*[DIA]/2" />
+        </Polygon>
+        </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Puolen kiven hormi, vasen" NameSpace="Valos.Components.Tulisijat" Description="Hormi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hormi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="6000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="390"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="390"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFF1693A" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+    <!--hormi ulkoa-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!--hormi aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-250" SizeY="[Syvyys]-250" SizeZ ="[Korkeus]" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+
+  <Component Name="Puolen kiven hormi, oikea " NameSpace="Valos.Components.Tulisijat" Description="Hormi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hormi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="6000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="390"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="390"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFF1693A" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--hormi ulkoa-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!--hormi aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-250" SizeY="[Syvyys]-250" SizeZ ="[Korkeus]" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Yhden kiven hormi, vasen" NameSpace="Valos.Components.Tulisijat" Description="Hormi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hormi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="6000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="524"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="390"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFF1693A" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--hormi ulkoa-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!--hormi aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-250" SizeY="[Syvyys]-250" SizeZ ="[Korkeus]" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Yhden kiven hormi, oikea" NameSpace="Valos.Components.Tulisijat" Description="Hormi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hormi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="6000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="524"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="390"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFF1693A" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--hormi ulkoa-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!--hormi aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="[Leveys]-250" SizeY="[Syvyys]-250" SizeZ ="[Korkeus]" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Yksirivinen hormi, vasen" NameSpace="Valos.Components.Tulisijat" Description="Hormi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hormi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="6000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="1060"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="390"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFF1693A" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--hormi ulkoa-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!--hormi aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="130" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="330" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="260" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="130" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="-330" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Yksirivinen hormi, oikea" NameSpace="Valos.Components.Tulisijat" Description="Hormi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hormi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="6000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="1060"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="390"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFF1693A" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--hormi ulkoa-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!--hormi aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="130" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="330" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="260" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="0" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="130" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="-330" Y="0" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+
+  <Component Name="Kaksirivinen hormi, vasen" NameSpace="Valos.Components.Tulisijat" Description="Hormi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hormi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="6000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="790"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="690"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFF1693A" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--hormi ulkoa-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!--hormi aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="130" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="200" Y="-130" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="260" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="-130" Y="-130" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="130" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="-200" Y="130" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="260" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="130" Y="130" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Kaksirivinen hormi, oikea" NameSpace="Valos.Components.Tulisijat" Description="Hormi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Hormi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="6000" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="790"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="690"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFF1693A" />
+    </Attributes>
+    <!-- 600x600x900-->
+    <Geometry Grade="Schematic">
+      <!--hormi ulkoa-->
+      <Solid Type="RectangularCuboid" BooleanOperation="Primary" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]" >
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+        <!--hormi aukko-->
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="130" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="200" Y="-130" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="260" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="-130" Y="-130" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>       
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="130" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="-200" Y="130" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+        <Solid Type="RectangularCuboid" BooleanOperation="SubtractionDynamic" SizeX="260" SizeY="130" SizeZ ="[Korkeus]" >
+          <Origin X="130" Y="130" Z="0"/>
+          <Xaxis X="100" Y="0" Z="0"/>
+          <YAxis X="0" Y="100" Z="0"/>
+        </Solid>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+   <Component Name="V" NameSpace="Valos.Components.Test" Description="S">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="S"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="100" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="900"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="900"/>
+      <DIA Label="Nurkan pyöreys" Type="Double" DefaultValue="100" />
+      <!--<Korkeus Label="Korkeus" Type="Double" DefaultValue="200" />-->
+      <Reuna Label="Reuna" Type="Double" DefaultValue="50"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!--suihku -->    
+      <Solid Type="Cylinder" Diameter="50" Length="200" >
+        <Origin X="[Leveys]/2+100" Y="-30" Z="800" />
+        <Xaxis X="0" Y="100" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="P" NameSpace="Valos.Components.Test" Description="S">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="S"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="100" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="900"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="900"/>
+      <DIA Label="Nurkan pyöreys" Type="Double" DefaultValue="100" />
+      <!--<Korkeus Label="Korkeus" Type="Double" DefaultValue="200" />-->
+      <Reuna Label="Reuna" Type="Double" DefaultValue="50"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!--suihku -->
+      <Solid Type="Cylinder" Diameter="50" Length="200" >
+        <Origin X="[Leveys]/2+100" Y="-30" Z="800" />
+        <Xaxis X="100" Y="100" Z="0" />
+        <Yaxis X="0" Y="0" Z="0" />
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Suihku ja seinä, vasen" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Suihkuseinä">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Suihkuseinä"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="100" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="900"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="900"/>     
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="20" Length="100" >
+        <Origin X="[Leveys]" Y="-[Syvyys]" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>  
+      <!-- seinä1-->
+      <Solid Type="RectangularCuboid" SizeX="10" SizeY="[Syvyys]" SizeZ ="1800" Opacity="0.5" >
+        <Origin X="[Leveys]" Y="-[Syvyys]/2" Z="100"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!--suihku -->
+      <Solid Type="Cylinder" Diameter="120" Length="20" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="[Syvyys]/2-15" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1910" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="1110" >
+        <Origin X="[Leveys]/2" Y="-20" Z="800" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>  
+      <Solid Type="Cylinder" Diameter="50" Length="200" >
+        <Origin X="[Leveys]/2+100" Y="-30" Z="800" />
+        <Xaxis X="0" Y="100" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+      </Solid>
+    </Geometry>
+  </Component>
+  
+  <Component Name="Suihku ja seinä, oikea" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Suihkuseinä">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Suihkuseinä"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="100" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="900"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="900"/>     
+    </Attributes>
+    <!-- 600x500x850-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="20" Length="100" >
+        <Origin X="0" Y="-[Syvyys]" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="RectangularCuboid" SizeX="10" SizeY="[Syvyys]" SizeZ ="1800" Opacity="0.5" >
+        <Origin X="0" Y="-[Syvyys]/2" Z="100"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>-->
+      <!--suihku -->
+      <Solid Type="Cylinder" Diameter="120" Length="20" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1900" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="[Syvyys]/2-15" >
+        <Origin X="[Leveys]/2" Y="-[Syvyys]/2" Z="1910" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="20" Length="1110" >
+        <Origin X="[Leveys]/2" Y="-20" Z="800" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>->  
+      <Solid Type="Cylinder" Diameter="50" Length="200" >
+        <Origin X="[Leveys]/2+100" Y="-30" Z="800" />
+        <Xaxis X="0" Y="100" Z="0" />
+        <Yaxis X="0" Y="0" Z="-100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Korkeakaappi, vasen" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Korkeakaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Lattiakaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="2400" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!--Korkea kaappi jaloilla-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="[Leveys]-50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="[Leveys]-50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-4" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin  X="[Leveys]/2" Y="-[Syvyys]/2-300" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+  <Component Name="Korkeakaappi, oikea" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Korkeakaappi">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Lattiakaappi"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="2400" />
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+      <Syvyys Label="Syvyys" Type="Double" DefaultValue="600"/>
+      <Color Label="Väri" Type="Color" DefaultValue="#FFFFFFFF" />
+      <Color2 Label="Oven väri" Type="Color" DefaultValue="#FF919191" />
+    </Attributes>
+    <!--Korkea kaappi jaloilla-->
+    <Geometry Grade="Schematic">
+      <!-- Pyöreät jalat-->
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="-50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>     
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="-50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>     
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="-[Leveys]+50" Y="-50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <Solid Type="Cylinder" Diameter="50" Length="150" >
+        <Origin X="-[Leveys]+50" Y="-[Syvyys]+50" Z="0" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="100" Z="0" />
+      </Solid>
+      <!--runko-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]" SizeY="[Syvyys]" SizeZ ="[Korkeus]-150" >
+        <Origin  X="-[Leveys]/2" Y="-[Syvyys]/2" Z="150"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+      <!-- ovi-->
+      <Solid Type="RectangularCuboid" SizeX="[Leveys]-4" SizeY="[Korkeus]-150" SizeZ ="20" Color="[Color2]">
+        <Origin X="-[Leveys]/2" Y="-[Syvyys]/2-300" Z="[Korkeus]/2+75" />
+        <Xaxis X="100" Y="0" Z="0" />
+        <Yaxis X="0" Y="0" Z="100" />
+      </Solid>
+    </Geometry>
+  </Component>
+
+
+  <Component Name="Lasiseinä, vasen" NameSpace="Valos.Components.Kylpyhuonekalusteet" Description="Lasiseinä">
+    <Attributes>
+      <Name Label="Nimi" Type="String" DefaultValue="Lasiseinä"/>
+      <Korkeus Label="Korkeus" Type="Double" DefaultValue="2100" />
+      <Paksuus Label="Paksuus" Type="Double" DefaultValue="10"/>
+      <Leveys Label="Leveys" Type="Double" DefaultValue="600"/>
+    </Attributes>
+    <!-- lasi -->
+    <Geometry Grade="Schematic">
+      <!-- seinä1-->
+      <Solid Type="RectangularCuboid" SizeX="[Paksuus]" SizeY="[Leveys]" SizeZ ="[Korkeus]" Opacity="0.4" >
+        <!--<Origin X="[Leveys]" Y="-[Syvyys]/2" Z="0"/>-->
+        <Origin X="[Paksuus]/2" Y="-[Leveys]/2" Z="0"/>
+        <Xaxis X="100" Y="0" Z="0"/>
+        <YAxis X="0" Y="100" Z="0"/>
+      </Solid>
+    </Geometry>
+  </Component>
+  
+</Components>
+

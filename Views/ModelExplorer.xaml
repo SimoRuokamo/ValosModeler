@@ -1,0 +1,252 @@
+﻿<UserControl x:Class="ValosModeler.Views.ModelExplorer"
+						 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+						 xmlns:local="clr-namespace:ValosModeler.Views"
+						 mc:Ignorable="d" 
+						 d:DesignHeight="450" d:DesignWidth="800">
+	<UserControl.Resources>
+
+		<Style x:Key="VisibilityImageStyle" TargetType="{x:Type Image}">
+			<Setter Property="Source" Value="{StaticResource Icon_PTree_3DLAMPOFF_002}" />
+			<Setter Property="Visibility" Value="{Binding IsDataLoaded, Converter={StaticResource BoolToVisConverter}}" />
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Effect">
+						<Setter.Value>
+							<DropShadowEffect Color="Goldenrod" Direction="0" ShadowDepth="0" BlurRadius="8" />
+						</Setter.Value>
+					</Setter>
+				</Trigger>
+				<DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=ToggleButton}, Path=IsChecked}" Value="True">
+					<Setter Property="Source" Value="{StaticResource Icon_PTree_3DLAMPON_002}" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="IconImageStyle" TargetType="{x:Type Image}">
+			<Setter Property="Source" Value="{Binding IconImageSource}" />
+			<Style.Triggers>
+				<!--<DataTrigger Binding="{Binding IsCurrent}" Value="False">
+					<Setter Property="Opacity" Value="0.5" />
+				</DataTrigger>-->
+				<!--<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=TreeViewItem}, Path=IsExpanded}" Value="true"/>
+						<Condition Binding="{Binding DataNode.IsGroupNode}" Value="true"/>
+					</MultiDataTrigger.Conditions>
+					<Setter Property="Source" Value="{StaticResource Icon_PTree_NodeOPEN}" />
+				</MultiDataTrigger>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=TreeViewItem}, Path=IsExpanded}" Value="false"/>
+						<Condition Binding="{Binding DataNode.IsGroupNode}" Value="true"/>
+					</MultiDataTrigger.Conditions>
+					<Setter Property="Source" Value="{StaticResource Icon_PTree_NodeCLOSED}" />
+				</MultiDataTrigger>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=TreeViewItem}, Path=IsExpanded}" Value="true"/>
+						<Condition Binding="{Binding DataNode, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type BIMmodels:ModelFolderNode}"/>
+					</MultiDataTrigger.Conditions>
+					<Setter Property="Source" Value="{StaticResource Icon_PTree_NodeOPEN}" />
+				</MultiDataTrigger>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=TreeViewItem}, Path=IsExpanded}" Value="false"/>
+						<Condition Binding="{Binding DataNode, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type BIMmodels:ModelFolderNode}"/>
+					</MultiDataTrigger.Conditions>
+					<Setter Property="Source" Value="{StaticResource Icon_PTree_NodeCLOSED}" />
+				</MultiDataTrigger>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=TreeViewItem}, Path=IsExpanded}" Value="true"/>
+						<Condition Binding="{Binding DataNode, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type pdata:FolderNode}"/>
+					</MultiDataTrigger.Conditions>
+					<Setter Property="Source" Value="{StaticResource Icon_PTree_NodeOPEN}" />
+				</MultiDataTrigger>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=TreeViewItem}, Path=IsExpanded}" Value="false"/>
+						<Condition Binding="{Binding DataNode, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type pdata:FolderNode}"/>
+					</MultiDataTrigger.Conditions>
+					<Setter Property="Source" Value="{StaticResource Icon_PTree_NodeCLOSED}" />
+				</MultiDataTrigger>-->
+
+				<Trigger Property="Source" Value="{x:Null}">
+					<Setter Property="Visibility" Value="Collapsed" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="ReservedIconImageStyle" TargetType="{x:Type Image}">
+			<!--<Setter Property="Source" Value="{Binding ReservedIconImageSource}" />-->
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding ReservationStatus}" Value="Free">
+					<Setter Property="Source" Value="{StaticResource Icon_NodeLock_Black}" />
+				</DataTrigger>
+				<DataTrigger Binding="{Binding ReservationStatus}" Value="ReservedForCurrentUser">
+					<Setter Property="Source" Value="{StaticResource Icon_NodeLock_GreenOpen}" />
+				</DataTrigger>
+				<DataTrigger Binding="{Binding ReservationStatus}" Value="LockedByOtherUser">
+					<Setter Property="Source" Value="{StaticResource Icon_NodeLock_Red}" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="IconImageBorderStyle" TargetType="{x:Type Border}">
+			<Setter Property="CornerRadius" Value="2" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="BorderBrush" Value="Transparent" />
+			<Setter Property="ToolTip" Value="{x:Null}" />
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding IsTarget}" Value="true">
+					<Setter Property="BorderBrush" Value="Black" />
+					<Setter Property="ToolTip" Value="Target Folder" />
+				</DataTrigger>
+				<DataTrigger Binding="{Binding Source, ElementName=iconImage}" Value="{x:Null}">
+					<Setter Property="Visibility" Value="Collapsed" />
+				</DataTrigger>
+				<DataTrigger Binding="{Binding IsOrIncludesVisibleObjectIn3D}" Value="true">
+					<Setter Property="Margin" Value="4,0,0,0" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="ReservedIconImageBorderStyle" TargetType="{x:Type Border}">
+			<Setter Property="BorderThickness" Value="0" />
+			<Setter Property="BorderBrush" Value="Transparent" />
+			<Setter Property="ToolTip" Value="{x:Null}" />
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding IsReservationStatusVisible}" Value="false">
+					<Setter Property="Visibility" Value="Collapsed" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+			<Setter Property="Margin" Value="4,0,0,0" />
+			<Setter Property="CornerRadius" Value="2" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="Padding" Value="2,1,2,1" />
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding IsSelected}" Value="True">
+					<Setter Property="BorderBrush" Value="{DynamicResource TreeViewSelectedBorderBrush}" />
+					<Setter Property="Background" Value="{DynamicResource TreeViewSelectedBackgroundBrush}" />
+				</DataTrigger>
+				<DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=TreeViewItem}, Path=IsEnabled}" Value="false">
+					<Setter Property="TextBlock.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+				</DataTrigger>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding IsSelected}" Value="false" />
+						<Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="true" />
+					</MultiDataTrigger.Conditions>
+					<Setter Property="BorderBrush" Value="{DynamicResource TreeViewMouseOverBorderBrush}" />
+					<Setter Property="Background" Value="{DynamicResource TreeViewMouseOverBackgroundBrush}" />
+				</MultiDataTrigger>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding IsSelected}" Value="true" />
+						<Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="true" />
+					</MultiDataTrigger.Conditions>
+					<Setter Property="BorderBrush" Value="#7DA2CE" />
+					<Setter Property="Background" Value="{DynamicResource TreeViewMouseOverSelectedBackgroundBrush}" />
+				</MultiDataTrigger>
+				<DataTrigger Binding="{Binding IsTarget}" Value="True">
+					<Setter Property="BorderBrush" Value="Black" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="NodePlusMarkerStyle" TargetType="{x:Type TextBlock}">
+			<Setter Property="Visibility" Value="Collapsed" />
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding IsCurrentGrid}" Value="true">
+					<Setter Property="Visibility" Value="Visible" />
+					<Setter Property="ToolTip" Value="The Current Grid" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+	</UserControl.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Border Grid.Row="0" Background="WhiteSmoke" BorderThickness="0,0,0,0" BorderBrush="LightGray" Visibility="{Binding IsServerConnectedVisibility}">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Margin="2" Text="{Binding IsServerConnected}"/>
+				<!--<Button Command="{Binding LoginProjectCommand}" Content="Login" />
+				<Button Command="{Binding LogoutProjectCommand}" Content="Login out" />-->
+			</StackPanel>
+		</Border>
+		<!--<Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="0,1,0,0" BorderBrush="LightGray" Visibility="{Binding ShowInDebugConfig}">
+			<StackPanel Orientation="Horizontal">
+				<Button Command="{Binding RefreshTreeCommand}" Content="Refresh" />
+				<Button Command="{Binding GarbageCollectCommand}" Content="GC" />
+			</StackPanel>
+		</Border>-->
+		<TreeView x:Name="_projectTree" ItemsSource="{Binding Root}" IsEnabled="{Binding IsEnabled}" BorderThickness="0,1,0,0" BorderBrush="LightGray" Grid.Row="1">
+			<TreeView.ItemContainerStyle>
+				<Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+					<EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
+					<EventSetter Event="TreeViewItem.ContextMenuOpening" Handler="TreeViewItem_ContextMenuOpening"/>
+					<EventSetter Event="TreeViewItem.KeyDown" Handler="TreeViewItem_KeyDown"/>
+					<EventSetter Event="TreeViewItem.Selected" Handler="TreeView_SelectedItemChanged" />
+					<EventSetter Event="RequestBringIntoView" Handler="TreeViewItem_RequestBringIntoView"/>
+					<Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+					<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+					<Setter Property="FontWeight" Value="Normal" />
+					<Setter Property="FontStyle" Value="Normal" />
+					<Setter Property="BorderThickness" Value="0" />
+					<Setter Property="ContextMenu" Value="{Binding ItemContextMenu}" />
+					<Setter Property="ToolTip" Value="{Binding ItemToolTip}" />
+					<Setter Property="ToolTipService.ShowDuration" Value="{Binding ItemToolTipShowDuration}" />
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding IsDataLoaded}" Value="False">
+							<Setter Property="FontStyle" Value="Italic" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</TreeView.ItemContainerStyle>
+
+			<TreeView.ItemTemplate>
+				<HierarchicalDataTemplate ItemsSource="{Binding Children}">
+					<HierarchicalDataTemplate.Resources>
+					</HierarchicalDataTemplate.Resources>
+
+					<StackPanel Orientation="Horizontal" MouseLeftButtonUp="TreeViewItem_MouseLeftButtonUp">
+						<Border Style="{StaticResource ReservedIconImageBorderStyle}" VerticalAlignment="Center" Margin="0,0,2,0" Width="10">
+							<Image x:Name="reservedIconImage" Height="10" Width="10" HorizontalAlignment="Right" Style="{StaticResource ReservedIconImageStyle}"/>
+						</Border>
+						<StackPanel Orientation="Horizontal"  Visibility="{Binding DataContext.SupportNodeVisibilityOption, Converter={StaticResource BoolToVisConverter},
+							RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeView}}}">
+							<ToggleButton Name="VisibilityToggleB" IsChecked="{Binding IsShownIn3D}" Visibility="{Binding IsOrIncludesVisibleObjectIn3D, Converter={StaticResource BoolToVisConverter}}"
+											ToolTip="Toggle Visibility" VerticalAlignment="Center">
+								<ToggleButton.Template>
+									<ControlTemplate>
+										<Image Width="11" Height="11" Style="{StaticResource VisibilityImageStyle}" />
+									</ControlTemplate>
+								</ToggleButton.Template>
+							</ToggleButton>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" >
+							<Border Style="{StaticResource IconImageBorderStyle}" VerticalAlignment="Center">
+								<Image x:Name="iconImage" Margin="0,0,0,0" Height="16" Width="16" Style="{StaticResource IconImageStyle}"/>
+							</Border>
+							<Border Style="{StaticResource BorderStyle}" VerticalAlignment="Center" >
+								<StackPanel Orientation="Horizontal">
+									<TextBlock Text="+" Style="{StaticResource NodePlusMarkerStyle}" VerticalAlignment="Center" />
+									<TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+								</StackPanel>
+							</Border>
+						</StackPanel>
+					</StackPanel>
+				</HierarchicalDataTemplate>
+			</TreeView.ItemTemplate>
+		</TreeView>
+	</Grid>
+</UserControl>

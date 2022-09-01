@@ -1,0 +1,264 @@
+﻿<RibbonWindow x:Class="ValosModeler.MainWindow"
+				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				xmlns:local="clr-namespace:ValosModeler"
+			xmlns:avalonDock="clr-namespace:AvalonDock;assembly=AvalonDock"
+			xmlns:avalonDockControls="clr-namespace:AvalonDock.Controls;assembly=AvalonDock"
+							xmlns:infra="clr-namespace:ValosModeler.Infrastructure"
+				mc:Ignorable="d"
+				Title="{Binding WindowTitle}" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+	<Window.InputBindings>
+		<KeyBinding Key="S" Modifiers="Control"   Command="{Binding SaveDesignDatabaseCommand}" />
+	</Window.InputBindings>
+	<Window.TaskbarItemInfo>
+		<TaskbarItemInfo ProgressState="{Binding WindowProgressBarState}" ProgressValue="{Binding WindowProgressBarValue}" />
+	</Window.TaskbarItemInfo>
+
+	<RibbonWindow.Resources>
+		<Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}" >
+			<Setter Property="VerticalAlignment" Value="Center" />
+		</Style>
+	</RibbonWindow.Resources>
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Ribbon x:Name="Ribbon" WindowIconVisibility="Collapsed" 
+						 SelectedItem="{Binding SelectedRibbonTab, Mode=TwoWay}"
+						 ItemsSource="{Binding RibbonTabSource}"
+						 ContextualTabGroupsSource="{Binding RibbonContextualTabGroupSource}"
+						Background="#e8e8e8"
+						 >
+			<Ribbon.ApplicationMenu>
+				<RibbonApplicationMenu IsMainMenu="True"
+					SmallImageSource="{StaticResource ValosStartMenuIcon}" Background="LightSlateGray">
+
+					<RibbonApplicationMenuItem 
+						Command="{Binding NewDesignDatabaseCommand}" 
+						Header="New Design"
+						ImageSource="{StaticResource NewDesign32Icon}" 
+						ToolTipTitle="New Design File" 
+						ToolTipDescription="Create a new design file." />
+					<RibbonSeparator/>
+					<RibbonApplicationMenuItem 
+						Command="{Binding OpenDesignDatabaseCommand}" 
+						Header="Open"
+						ImageSource="{StaticResource OpenDesignFile32Icon}" 
+						ToolTipTitle="Open Design File" 
+						ToolTipDescription="Open an existing design file." />
+					<RibbonApplicationMenuItem 
+						Command="{Binding SaveDesignDatabaseCommand}" 
+						Header="Save"
+						ImageSource="{StaticResource SaveDesignFile32Icon}" 
+						ToolTipTitle="Save Design"
+						ToolTipDescription="Save the design file with the same name." />
+					<RibbonApplicationMenuItem 
+						Command="{Binding SaveAsDesignDatabaseCommand}" 
+						Header="Save As"
+						ImageSource="{StaticResource SaveDesignFileAs32Icon}" 
+						ToolTipTitle="Save As" 
+						ToolTipDescription="Save the design file with a new name." />
+
+					<RibbonSeparator/>
+					<!--SplitMenuItem triggers commands twice.-->
+					<RibbonApplicationMenuItem 
+						Command="{Binding ImportIFCDataCommand}" 
+						Header="Import IFC"
+						ImageSource="{StaticResource Icon_Import}" 
+						ToolTipTitle="Import IFC file" 
+						ToolTipDescription="Import IFC file."  />
+					<RibbonApplicationMenuItem 
+						Command="{Binding ExportIFCCommand}" 
+						Header="Export IFC"
+						ImageSource="{StaticResource Icon_Export}" 
+						ToolTipTitle="Export IFC model" 
+						ToolTipDescription="Export IFC model file." />
+					<RibbonSeparator/>
+					<RibbonApplicationMenuItem Header="Server"
+						ImageSource="{StaticResource ValosServerIcon}">
+
+						<RibbonApplicationMenuItem 
+						Command="{Binding OpenServerModelCommand}"
+						Header="Open Server Model" 
+						ImageSource="{StaticResource ValosServerOpenModelIcon}"
+							ToolTipTitle="Open Server Model"
+							ToolTipDescription="Open a model from the server."
+						/>
+
+						<RibbonApplicationMenuItem 
+						Command="{Binding CheckProjectChangesCommand}"
+						Header="Check Model Changes" 
+						ImageSource="{StaticResource ValosServerCheckModelChangesIcon}"
+							ToolTipTitle="Check Model Changes"
+							ToolTipDescription="Check model changes from server."/>
+						<RibbonSeparator/>
+					</RibbonApplicationMenuItem>
+
+					<RibbonApplicationMenu.FooterPaneContent>
+						<Grid x:Name="_footerGrid">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<!--<RibbonButton Grid.Column="1" 
+											Command="{Binding ApplicationOptionsCommand}"
+											Label="Options"
+											SmallImageSource="images\SmallIcon.png"
+											ToolTipTitle="Options"
+											ToolTipDescription="Application options."/>-->
+							<RibbonButton Grid.Column="2" 
+											Command="{Binding ExitApplicationCommand}"
+											Label="Exit"
+											SmallImageSource="{StaticResource ExitIcon}"
+											ToolTipTitle="Exit"
+											ToolTipDescription="Close the design and exit the application."/>
+						</Grid>
+					</RibbonApplicationMenu.FooterPaneContent>
+
+				</RibbonApplicationMenu>
+			</Ribbon.ApplicationMenu>
+
+			<Ribbon.QuickAccessToolBar>
+				<RibbonQuickAccessToolBar MinWidth="140">
+					<!--<RibbonButton 
+						Command="{Binding UndoCommand}" 
+						Label="Undo" 
+						SmallImageSource="images\SmallIcon.png" 
+						ToolTipTitle="Undo (Ctrl+Z)" 
+						ToolTipDescription="Undo the last action." />
+					<RibbonButton 
+						Command="{Binding RedoCommand}" 
+						Label="Redo" 
+						SmallImageSource="images\SmallIcon.png" 
+						ToolTipTitle="Redo (Ctrl+Y)" 
+						ToolTipDescription="Redo the last action" />-->
+					<RibbonButton 
+						Command="{Binding NewDesignDatabaseCommand}" 
+						Label="New Design File" 
+						SmallImageSource="{StaticResource NewDesign16Icon}" 
+						ToolTipTitle="New Design File" 
+						ToolTipDescription="Create a new design file." />
+					<RibbonButton 
+						Command="{Binding OpenDesignDatabaseCommand}" 
+						Label="Open Design File" 
+						SmallImageSource="{StaticResource OpenDesignFile16Icon}" 
+						ToolTipTitle="Open Design File" 
+						ToolTipDescription="Open an existing design file."/>
+					<RibbonButton 
+						Command="{Binding SaveDesignDatabaseCommand}"
+						Label="Save" 
+						SmallImageSource="{StaticResource SaveDesignFile16Icon}" 
+						ToolTipTitle="Save" 
+						ToolTipDescription="Save the design file with the same name." />
+					<RibbonButton 
+						Command="{Binding SaveAsDesignDatabaseCommand}"
+						Label="Save As" 
+						SmallImageSource="{StaticResource SaveDesignFileAs16Icon}" 
+						ToolTipTitle="Save As" 
+						ToolTipDescription="Save the design file with a new name." />
+
+
+					<!--<RibbonMenuButton
+						Label="{Resx Key=_window, DefaultValue='Window'}" 
+						SmallImageSource="{StaticResource Icon_Ribbon_HomeWindowsDefaultLayout}"
+						ToolTipTitle="{Resx Key=_window_layout, DefaultValue='Window Layout'}"
+						ToolTipDescription="{Resx Key=_manage_the_window_layout, DefaultValue='Manage the window layout.'}">
+
+						<RibbonMenuItem 
+							Command="{Binding SaveDockLayoutCommand}"
+						Header="{Resx Key=_save_layout, DefaultValue='Save Layout'}" 
+						ImageSource="{StaticResource Icon_Ribbon_Home_WindowsSaveLayout}"
+						ToolTipTitle="{Resx Key=_save_layout, DefaultValue='Save Layout'}"
+						ToolTipDescription="{Resx Key=_save_layout, DefaultValue='Save Layout'}" />
+						<RibbonMenuItem 
+							Command="{Binding LoadSavedDockLayoutCommand}"
+						Header="{Resx Key=_load_saved_layout, DefaultValue='Load Saved Layout'}" 
+						ImageSource="{StaticResource Icon_Ribbon_Home_WindowsLoadLayout}"
+						ToolTipTitle="{Resx Key=_load_saved_layout, DefaultValue='Load Saved Layout'}"
+						ToolTipDescription="{Resx Key=_load_saved_layout, DefaultValue='Load Saved Layout'}" />
+						<RibbonMenuItem 
+							Command="{Binding LoadDefaultDockLayoutCommand}"
+						Header="{Resx Key=_load_default_layout, DefaultValue='Load Default Layout'}" 
+						ImageSource="{StaticResource Icon_Ribbon_HomeWindowsDefaultLayout}"
+						ToolTipTitle="{Resx Key=_load_default_layout, DefaultValue='Load Default Layout'}"
+						ToolTipDescription="{Resx Key=_load_default_layout, DefaultValue='Load Default Layout'}" />
+						<RibbonSeparator/>
+
+						<RibbonMenuItem 
+							Command="{Binding ShowAllDockWindowsCommand}"
+						Header="{Resx Key=_show_hidden_windows, DefaultValue='Show Hidden Windows'}" 
+						ImageSource="{StaticResource Icon_Ribbon_Home_ShowHiddenWindows}"
+						ToolTipTitle="{Resx Key=_show_hidden_windows, DefaultValue='Show Hidden Windows'}"
+						ToolTipDescription="{Resx Key=_show_hidden_windows, DefaultValue='Show Hidden Windows'}"/>
+					</RibbonMenuButton>-->
+
+				</RibbonQuickAccessToolBar>
+			</Ribbon.QuickAccessToolBar>
+
+		</Ribbon>
+
+		<!-- Layout must match the one in DockLayoutDefault.xml. MainWindow DataContext must not inherited to DockableContents. -->
+		<avalonDock:DockingManager Grid.Column="1" x:Name="dockingManager" Grid.Row="1" IsEnabled="{Binding IsEnabled}"
+										 ActiveContent="{Binding ActiveContent, Mode=TwoWay}">
+			<avalonDock:DockingManager.LayoutItemContainerStyleSelector>
+				<infra:AvalonLayoutItemStyleSelector>
+					<infra:AvalonLayoutItemStyleSelector.LayoutItemStyle>
+						<Style TargetType="{x:Type avalonDockControls:LayoutItem}">
+							<!--<Setter Property="IsActive" Value="{Binding Model.DataContext.IsActiveContent, Mode=OneWayToSource}"/>-->
+							<Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}"/>
+							<Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}"/>
+							<Setter Property="Title" Value="{Binding Model.DataContext.WindowTitle}"/>
+							<Setter Property="IconSource" Value="{Binding Model.DataContext.IconSource}"/>
+						</Style>
+					</infra:AvalonLayoutItemStyleSelector.LayoutItemStyle>
+					<infra:AvalonLayoutItemStyleSelector.LayoutAnchorableItemStyle>
+						<Style TargetType="{x:Type avalonDockControls:LayoutAnchorableItem}">
+							<!--<Setter Property="IsActive" Value="{Binding Model.DataContext.IsActiveContent, Mode=OneWayToSource}"/>-->
+							<Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}"/>
+							<!--Do not override native AvalonDock HideCommand - it used instead of close-->
+							<!--<Setter Property="HideCommand" Value="{Binding Model.DataContext.HideCommand}"/>-->
+							<Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}"/>
+							<Setter Property="Title" Value="{Binding Model.DataContext.WindowTitle}"/>
+							<!--<Setter Property="IconSource" Value="{Binding Model.DataContext.IconSource}"/>-->
+							<!--<Setter Property="IconSource" Value="images\SmallIcon.png"/>-->
+						</Style>
+					</infra:AvalonLayoutItemStyleSelector.LayoutAnchorableItemStyle>
+					<infra:AvalonLayoutItemStyleSelector.LayoutDocumentItemStyle>
+						<Style TargetType="{x:Type avalonDockControls:LayoutDocumentItem}">
+							<!--<Setter Property="IsActive" Value="{Binding Model.DataContext.IsActiveContent, Mode=OneWayToSource}"/>-->
+							<Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}"/>
+							<Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}"/>
+							<Setter Property="Title" Value="{Binding Model.DataContext.WindowTitle}"/>
+							<!--<Setter Property="IconSource" Value="{Binding Model.DataContext.IconSource}"/>-->
+							<!--<Setter Property="IconSource" Value="images\SmallIcon.png"/>-->
+						</Style>
+					</infra:AvalonLayoutItemStyleSelector.LayoutDocumentItemStyle>
+				</infra:AvalonLayoutItemStyleSelector>
+			</avalonDock:DockingManager.LayoutItemContainerStyleSelector>
+
+		</avalonDock:DockingManager>
+		<StatusBar Grid.Row="2" Height="23"  Name="StatusBar" VerticalAlignment="Bottom" >
+			<!--<StatusBarItem HorizontalAlignment="Center" Width="300" Name="SummaryStatusBar" Visibility="{Binding WindowProgressBarVisibility}">
+				<Grid Width="300">
+					<TextBlock Name="SummaryMsg" Text="{Binding WindowProgressBarMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Blue"/>
+				</Grid>
+			</StatusBarItem>-->
+
+			<StatusBarItem HorizontalAlignment="Right" Width="300" Name="ProgressStatusBar" Visibility="{Binding WindowProgressBarVisibility}">
+				<Grid Width="300">
+					<ProgressBar Name="ProgressBar" Value="{Binding WindowProgressBarValue}" Minimum="0" Maximum="1" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+					<TextBlock Name="StatusMsg" Text="{Binding WindowProgressBarMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Blue"/>
+				</Grid>
+			</StatusBarItem>
+
+		</StatusBar>
+
+	</Grid>
+</RibbonWindow>

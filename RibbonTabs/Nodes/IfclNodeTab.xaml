@@ -1,0 +1,23 @@
+﻿<RibbonTab x:Class="ValosModeler.RibbonTabs.Nodes.IfcNodeTab"
+						 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						 xmlns:local="clr-namespace:ValosModeler.RibbonTabs.Nodes"
+			 xmlns:tc="clr-namespace:Enterprixe.WPF.Tools.UserControls;assembly=EpxToolsWPFNet6"
+						 mc:Ignorable="d" 
+						 d:DesignHeight="150" d:DesignWidth="800">
+	<RibbonGroup Header="Information" Grid.IsSharedSizeScope="True">
+		<RibbonTwoLineText x:Name="InfoText" Text="{Binding Information}" TextAlignment="Left" />
+	</RibbonGroup>
+	<RibbonGroup Header="Find" Grid.IsSharedSizeScope="True">
+		<RibbonTwoLineText  Text="Find IFC Object:" TextAlignment="Left" />
+		<tc:EpxRibbonTextBox Label="#" Width="120" Text="{Binding SearchObject, Mode=OneWayToSource,UpdateSourceTrigger=LostFocus}"/>
+	</RibbonGroup>
+	<RibbonGroup Header="Visibility" Grid.IsSharedSizeScope="True">
+		<RibbonTwoLineText  Text="Show selected object only" TextAlignment="Left" />
+		<RibbonCheckBox Label="Show selected:" IsChecked="{Binding ShowSelected}"/>
+	</RibbonGroup>
+
+
+</RibbonTab>

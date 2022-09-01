@@ -1,0 +1,39 @@
+﻿<Application x:Class="ValosModeler.App"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:local="clr-namespace:ValosModeler"
+			 xmlns:tools="clr-namespace:Enterprixe.ValosUITools.Infrastructure.Tools;assembly=ValosUITools"
+			 xmlns:bhvr="clr-namespace:Enterprixe.WPF.Tools.BehaviorsAndAttachedProperties;assembly=EpxToolsWPFNet6">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Themes\Icons.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/ValosUITools;component/Themes/IconsProjectExplorer.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/ValosUITools;component/Themes/TreeView.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<tools:BoolToVisOrHiddenReversable x:Key="BoolToVisConverter" />
+			<tools:BoolToVisOrHiddenReversable x:Key="BoolToVisConverterInverted" Reverse="True" />
+			<tools:BoolToVisOrHiddenReversable x:Key="BoolToVisHiddenConverter" Hide="True" />
+			<tools:BoolToVisOrHiddenReversable x:Key="BoolToVisHiddenConverterInverted" Hide="True" Reverse="True" />
+			<tools:EnumMatchToBooleanConverter x:Key="EnumToBoolConverter" />
+			<tools:InverseBooleanConverter x:Key="InverseBoolConverter" />
+
+			<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+				<Setter Property="VerticalAlignment" Value="Center"/>
+			</Style>
+
+			<Style TargetType="{x:Type RibbonGroup}" BasedOn="{StaticResource {x:Type RibbonGroup}}">
+				<Setter Property="IsEnabled" Value="{Binding IsDataNodeEditable}"/>
+			</Style>
+
+			<Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+				<Setter Property="bhvr:TextBoxBehavior.SelectAllOnFocus" Value="True" />
+			</Style>
+
+			<Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+				<Setter Property="VerticalContentAlignment" Value="Center"/>
+			</Style>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>

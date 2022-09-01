@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="ValosModeler.Views.Model3DView.ModelView"
+						 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+						 xmlns:local="clr-namespace:ValosModeler.Views.Model3DView"
+						 xmlns:visuals="clr-namespace:ValosModeler.Views.Model3DView.Visuals"
+			 xmlns:te3d="clr-namespace:Enterprixe.WPF.Tools.Elements3D;assembly=EpxToolsWPFNet6Viewport"
+			 xmlns:tv3d="clr-namespace:Enterprixe.WPF.Tools.Viewport;assembly=EpxToolsWPFNet6Viewport"
+						 mc:Ignorable="d" 
+						 d:DesignHeight="450" d:DesignWidth="800">
+	<UserControl.Resources>
+
+		<LinearGradientBrush x:Key="Brush_MainBackground" StartPoint="0.5,0" EndPoint="0.5,1" >
+			<GradientStop Color="White" Offset="0.044" />
+			<GradientStop Color="#91A9C4" Offset="0.9" />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="Brush_MainBackgroundDisabled" StartPoint="0.5,0" EndPoint="0.5,1" >
+			<GradientStop Color="Gray" Offset="0.044" />
+			<GradientStop Color="#91A9C4" Offset="0.9" />
+		</LinearGradientBrush>
+
+		<Style x:Key="MainGridStyle" TargetType="Grid">
+			<Setter Property="Background" Value="{StaticResource Brush_MainBackground}" />
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding IsEnabled}" Value="false">
+					<Setter Property="Background" Value="{StaticResource Brush_MainBackgroundDisabled}" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+	</UserControl.Resources>
+
+	<Grid ClipToBounds="True" IsEnabled="{Binding IsEnabled}"  Style="{StaticResource MainGridStyle}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition />
+			<RowDefinition Height="auto" />
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="1" ClipToBounds="True" KeyboardNavigation.TabNavigation="None">
+			<local:ModelViewport x:Name="_viewport3D" IsHitTestVisible="false"
+								 ViewController="{Binding ViewportController}"
+								 Camera="{Binding ViewportController.CurrentCamera}" 
+								AllowToUpLookDirection="True" 
+								ClipToBounds="False"
+								SnapsToDevicePixels="True"
+								 MaxModelSize="300000" 
+								 >
+
+				<te3d:CSAxes x:Name="_globalCS" ColumnHeight="10000" Size="10000"
+									 Mode3d="{Binding ViewportController.ViewMode}"/>
+
+				<local:AppModelPart3DContainer ViewModel="{Binding}" Parts="{Binding DisplayedParts}" Viewport="{Binding ElementName=_viewport3D}" />
+				<local:Grid3DContainer ViewModel="{Binding}" Parts="{Binding DisplayedGrids}" Viewport="{Binding ElementName=_viewport3D}" />
+
+				<ModelVisual3D >
+					<ModelVisual3D.Content>
+						<Model3DGroup x:Name="_lights3D" >
+							<DirectionalLight Color="White" Direction="-1,2,-0.8" />
+							<DirectionalLight Color="White" Direction="1,-2,-0.8" />
+							<DirectionalLight Color="White" Direction="-1,-2,0.8" />
+							<DirectionalLight Color="White" Direction="1,2,0.8" />
+						</Model3DGroup>
+					</ModelVisual3D.Content>
+				</ModelVisual3D>
+			</local:ModelViewport>
+		</Grid>
+
+		<visuals:SnapOverlayCanvas x:Name="_overlayCanvas" Grid.Row="1" ItemsSource="{Binding OverlayShapes}" KeyboardNavigation.TabNavigation="None" IsHitTestVisible="False" />
+		<local:PointInputToolControl Grid.Row="1" x:Name="_pointInputTool" Controller="{Binding ElementName=_viewport3D}" KeyboardNavigation.TabNavigation="Cycle"/>
+		<tv3d:MouseEventCanvas Grid.Row="1" x:Name="_mouseEventCanvas" AttachedViewport="{Binding ElementName=_viewport3D}" IsHitTestVisible="{Binding MouseEventCanvasHitTestOn, ElementName=_pointInputTool}"
+									KeyboardNavigation.TabNavigation="None"/>
+
+		<StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" Background="WhiteSmoke">
+			<!--<ProgressBar Margin="2,0,0,0" Width="50" Value="{Binding MainViewModel.WindowProgressBarValue}" Maximum="1.0" Visibility="{Binding MainViewModel.WindowProgressBarVisibility}" IsIndeterminate="{Binding MainViewModel.WindowProgressBarIsIndeterminate}" />-->
+			<TextBlock Padding="4,2,4,2" VerticalAlignment="Bottom" Text="{Binding CommandStatusText}" />
+		</StackPanel>
+
+		<Border Grid.Row="1" BorderThickness="3,3,3,3" BorderBrush="#FFFFB032" >
+			<Border.Style>
+				<Style TargetType="Border" >
+					<Setter Property="Visibility" Value="Collapsed" />
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding IsAnyCommandInProgress}" Value="true">
+							<Setter Property="Visibility" Value="Visible" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Border.Style>
+		</Border>
+	</Grid>
+</UserControl>
