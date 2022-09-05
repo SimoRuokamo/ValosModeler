@@ -493,9 +493,9 @@ namespace ValosModeler.Views.Model3DView
 		{
 			if (mouseovervisual == null)
 			{
-				ViewModel.SetHoverText(string.Empty);
+//				ViewModel.SetHoverText(string.Empty);
 #if DEBUG
-				ViewModel.SetHoverText($" Rendered {_modelRoot.InnerMeshPool.NumObjects} objects");
+//				ViewModel.SetHoverText($" Rendered {_modelRoot.InnerMeshPool.NumObjects} objects");
 #endif
 			}
 			else 
